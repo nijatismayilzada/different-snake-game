@@ -1,18 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/board"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/top" >
+
+
+        <ImageView
+            android:id="@+id/boardHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/middle">
+
+        <ImageButton
+            android:id="@+id/upButton"
+            android:layout_width="@dimen/button"
+            android:layout_height="@dimen/button"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_arrow_drop_down_circle_24px"
+            android:onClick="moveUp"
+            android:rotation="180" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/container_center"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true" />
+
+            <ImageButton
+                android:id="@+id/leftButton"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:layout_marginRight="@dimen/buttonMargin"
+                android:layout_toLeftOf="@id/container_center"
+                android:onClick="moveLeft"
+                android:rotation="90"
+                android:background="@drawable/ic_arrow_drop_down_circle_24px" />
+
+
+            <ImageButton
+                android:id="@+id/rightButton"
+                android:layout_width="@dimen/button"
+                android:layout_height="@dimen/button"
+                android:layout_marginLeft="@dimen/buttonMargin"
+                android:layout_toRightOf="@id/container_center"
+                android:onClick="moveRight"
+                android:rotation="270"
+                android:background="@drawable/ic_arrow_drop_down_circle_24px" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/downButton"
+            android:layout_width="@dimen/button"
+            android:layout_height="@dimen/button"
+            android:layout_gravity="center"
+            android:onClick="moveDown"
+            android:background="@drawable/ic_arrow_drop_down_circle_24px" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

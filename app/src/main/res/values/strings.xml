@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Different Snake Game</string>
+    <string name="keep_tapping">Keep tapping.</string>
+    <string name="done">Done!</string>
 </resources>
