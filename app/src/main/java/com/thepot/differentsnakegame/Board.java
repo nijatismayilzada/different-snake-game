@@ -2,6 +2,7 @@ package com.thepot.differentsnakegame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.ViewTreeObserver;
@@ -21,8 +22,14 @@ public class Board {
 
 
     private int mColorBackground;
+    private int mColorBoardLine;
     private ImageView mImageView;
     private AppCompatActivity appCompatActivity;
+    private int sS;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
 
     public Board(AppCompatActivity context) {
 
@@ -30,8 +37,8 @@ public class Board {
 
         mImageView = context.findViewById(R.id.boardHolder);
 
-        mColorBackground = ResourcesCompat.getColor(context.getResources(),
-                R.color.colorBackground, null);
+        mColorBackground = ResourcesCompat.getColor(context.getResources(), R.color.colorBackground, null);
+        mColorBoardLine = ResourcesCompat.getColor(context.getResources(), R.color.colorBoardLine, null);
 
 
         final ViewTreeObserver observer = mImageView.getViewTreeObserver();
@@ -42,9 +49,20 @@ public class Board {
                         int w = mImageView.getMeasuredWidth();
                         int h = mImageView.getMeasuredHeight();
 
+                        int wS = w / 14;
+                        int hS = h / 20;
+
+                        sS = Math.min(wS, hS);
+
+                        startX = (w - sS * 14) / 2;
+                        startY = (h - sS * 20) / 2;
+                        endX = w - (startX);
+                        endY = h - startY;
+
+
                         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
                         mImageView.setImageBitmap(mBitmap);
-                        snake = new Snake(5, w, h);
+                        snake = new Snake(5, startX + sS * 7, startY + sS * 10, sS);
                         clearAndDraw();
                     }
                 });
@@ -70,6 +88,13 @@ public class Board {
             d.setBounds(s);
             d.draw(canvas);
         }
+
+        Paint boardP = new Paint();
+        boardP.setStyle(Paint.Style.STROKE);
+        boardP.setStrokeWidth(sS / 10);
+        boardP.setColor(mColorBoardLine);
+
+        canvas.drawRect(new Rect(startX, startY, endX, endY), boardP);
 
         mImageView.invalidate();
     }

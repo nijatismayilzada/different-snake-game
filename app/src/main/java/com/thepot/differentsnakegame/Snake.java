@@ -9,12 +9,12 @@ public class Snake {
     private ArrayList<Rect> rects;
     private SnakeHeadDirection snakeHeadDirection;
 
-    public Snake(int maxSnakeSize, int w, int h) {
+    public Snake(int maxSnakeSize, int startX, int startY, int cellSize) {
         this.maxSnakeSize = maxSnakeSize;
         rects = new ArrayList<>(maxSnakeSize);
 
         Rect rect = new Rect();
-        rect.set(w / 2 - 100, h / 2 - 100, w / 2 + 100, h / 2 + 100);
+        rect.set(startX, startY, startX + cellSize, startY + cellSize);
         rects.add(rect);
 
         snakeHeadDirection = SnakeHeadDirection.RIGHT;
