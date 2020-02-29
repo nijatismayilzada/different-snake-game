@@ -1,10 +1,12 @@
 package com.thepot.differentsnakegame;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.thepot.differentsnakegame.model.Cell;
+import com.thepot.differentsnakegame.model.CellType;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,37 +26,46 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void moveUp(View view) {
-        Snake snake = board.getSnake();
-        snake.setSnakeHeadDirection(SnakeHeadDirection.UP);
-        Rect rect = snake.getHeadToMove();
+        Cell snakeHead = board.getSnake().getSnakeHead();
+        snakeHead.setCellType(CellType.SNAKE_BODY);
 
-        rect.set(rect.left, rect.top * 2 - rect.bottom, rect.right, rect.top);
+        Cell newHead = board.getCage().cells[snakeHead.getY() - 1][snakeHead.getX()];
+        newHead.setCellType(CellType.SNAKE_HEAD_UP);
+        board.getSnake().addCellAndRemoveTail(newHead);
+
         board.clearAndDraw();
-
     }
 
     public void moveDown(View view) {
-        Snake snake = board.getSnake();
-        snake.setSnakeHeadDirection(SnakeHeadDirection.DOWN);
-        Rect rect = snake.getHeadToMove();
-        rect.set(rect.left, rect.bottom, rect.right, rect.bottom * 2 - rect.top);
+        Cell snakeHead = board.getSnake().getSnakeHead();
+        snakeHead.setCellType(CellType.SNAKE_BODY);
+
+        Cell newHead = board.getCage().cells[snakeHead.getY() + 1][snakeHead.getX()];
+        newHead.setCellType(CellType.SNAKE_HEAD_DOWN);
+        board.getSnake().addCellAndRemoveTail(newHead);
+
         board.clearAndDraw();
     }
 
     public void moveLeft(View view) {
-        Snake snake = board.getSnake();
-        snake.setSnakeHeadDirection(SnakeHeadDirection.LEFT);
-        Rect rect = snake.getHeadToMove();
-        rect.set(rect.left * 2 - rect.right, rect.top, rect.left, rect.bottom);
+        Cell snakeHead = board.getSnake().getSnakeHead();
+        snakeHead.setCellType(CellType.SNAKE_BODY);
+
+        Cell newHead = board.getCage().cells[snakeHead.getY()][snakeHead.getX() - 1];
+        newHead.setCellType(CellType.SNAKE_HEAD_LEFT);
+        board.getSnake().addCellAndRemoveTail(newHead);
 
         board.clearAndDraw();
     }
 
     public void moveRight(View view) {
-        Snake snake = board.getSnake();
-        snake.setSnakeHeadDirection(SnakeHeadDirection.RIGHT);
-        Rect rect = snake.getHeadToMove();
-        rect.set(rect.right, rect.top, rect.right * 2 - rect.left, rect.bottom);
+        Cell snakeHead = board.getSnake().getSnakeHead();
+        snakeHead.setCellType(CellType.SNAKE_BODY);
+
+        Cell newHead = board.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1];
+        newHead.setCellType(CellType.SNAKE_HEAD_RIGHT);
+        board.getSnake().addCellAndRemoveTail(newHead);
+
         board.clearAndDraw();
     }
 

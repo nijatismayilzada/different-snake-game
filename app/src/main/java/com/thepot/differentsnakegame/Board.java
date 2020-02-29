@@ -4,65 +4,57 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.ArrayList;
+import com.thepot.differentsnakegame.model.Cage;
+import com.thepot.differentsnakegame.model.Snake;
 
 import static android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import static com.thepot.differentsnakegame.model.Cage.CELL_MAX_ID;
+import static com.thepot.differentsnakegame.model.Cage.CELL_MIN_ID;
 
 public class Board {
-    private Canvas canvas;
-    private Bitmap mBitmap;
-    private Snake snake;
-
-
     private int mColorBackground;
-    private int mColorBoardLine;
+    private Bitmap mBitmap;
     private ImageView mImageView;
-    private AppCompatActivity appCompatActivity;
-    private int sS;
-    private int startX;
-    private int startY;
-    private int endX;
-    private int endY;
+    private Paint boardPaint;
+    private AppCompatActivity activity;
+    private Snake snake;
+    private Cage cage;
+    private Rect border;
+
 
     public Board(AppCompatActivity context) {
-
-        appCompatActivity = context;
+        activity = context;
 
         mImageView = context.findViewById(R.id.boardHolder);
-
-        mColorBackground = ResourcesCompat.getColor(context.getResources(), R.color.colorBackground, null);
-        mColorBoardLine = ResourcesCompat.getColor(context.getResources(), R.color.colorBoardLine, null);
-
 
         final ViewTreeObserver observer = mImageView.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(
                 new OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        int w = mImageView.getMeasuredWidth();
-                        int h = mImageView.getMeasuredHeight();
+                        mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
 
-                        int wS = w / 14;
-                        int hS = h / 20;
+                        int width = mImageView.getMeasuredWidth();
+                        int height = mImageView.getMeasuredHeight();
 
-                        sS = Math.min(wS, hS);
-
-                        startX = (w - sS * 14) / 2;
-                        startY = (h - sS * 20) / 2;
-                        endX = w - (startX);
-                        endY = h - startY;
-
-
-                        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+                        cage = new Cage(width, height);
+                        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                         mImageView.setImageBitmap(mBitmap);
-                        snake = new Snake(5, startX + sS * 7, startY + sS * 10, sS);
+
+                        snake = new Snake(cage);
+                        boardPaint = new Paint();
+                        boardPaint.setStyle(Paint.Style.STROKE);
+                        boardPaint.setStrokeWidth(cage.cellSize / 10);
+                        boardPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBoardLine, null));
+                        Rect startRect = cage.cells[CELL_MIN_ID][CELL_MIN_ID].getRect();
+                        Rect endRect = cage.cells[CELL_MAX_ID][CELL_MAX_ID].getRect();
+                        border = new Rect(startRect.left, startRect.top, endRect.right, endRect.bottom);
                         clearAndDraw();
                     }
                 });
@@ -72,30 +64,15 @@ public class Board {
         return snake;
     }
 
+    public Cage getCage() {
+        return cage;
+    }
 
     public void clearAndDraw() {
-        canvas = new Canvas(mBitmap);
+        Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
-        ArrayList<Rect> rects = snake.getRects();
-        for (int i = 0; i < rects.size(); i++) {
-            Rect s = rects.get(i);
-            Drawable d;
-            if (i != rects.size() - 1) {
-                d = appCompatActivity.getResources().getDrawable(R.drawable.ic_add_box_24px, null);
-            } else {
-                d = appCompatActivity.getResources().getDrawable(snake.getSnakeHeadDirection().getResource(), null);
-            }
-            d.setBounds(s);
-            d.draw(canvas);
-        }
-
-        Paint boardP = new Paint();
-        boardP.setStyle(Paint.Style.STROKE);
-        boardP.setStrokeWidth(sS / 10);
-        boardP.setColor(mColorBoardLine);
-
-        canvas.drawRect(new Rect(startX, startY, endX, endY), boardP);
-
+        snake.drawSnake(activity, canvas);
+        canvas.drawRect(border, boardPaint);
         mImageView.invalidate();
     }
 
