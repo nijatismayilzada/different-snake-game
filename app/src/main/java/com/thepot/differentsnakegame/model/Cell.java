@@ -7,6 +7,7 @@ public class Cell {
     private int y;
     private CellType cellType;
     private Rect rect;
+    private boolean moveToNextLevel;
 
     public Cell() {
     }
@@ -41,5 +42,13 @@ public class Cell {
 
     public void setRect(Rect rect) {
         this.rect = rect;
+    }
+
+    public boolean isMoveToNextLevel() {
+        return moveToNextLevel;
+    }
+
+    public void setMoveToNextLevel(boolean moveToNextLevel) {
+        this.moveToNextLevel = moveToNextLevel;
     }
 }

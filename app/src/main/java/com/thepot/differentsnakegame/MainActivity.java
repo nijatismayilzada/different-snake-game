@@ -20,51 +20,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         board = new Board(this);
-
-
     }
 
 
     public void moveUp(View view) {
-        Cell snakeHead = board.getSnake().getSnakeHead();
-        snakeHead.setCellType(CellType.SNAKE_BODY);
-
-        Cell newHead = board.getCage().cells[snakeHead.getY() - 1][snakeHead.getX()];
-        newHead.setCellType(CellType.SNAKE_HEAD_UP);
-        board.getSnake().addCellAndRemoveTail(newHead);
-
-        board.clearAndDraw();
+        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY() - 1,
+                board.getSnake().getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
     }
 
     public void moveDown(View view) {
-        Cell snakeHead = board.getSnake().getSnakeHead();
-        snakeHead.setCellType(CellType.SNAKE_BODY);
-
-        Cell newHead = board.getCage().cells[snakeHead.getY() + 1][snakeHead.getX()];
-        newHead.setCellType(CellType.SNAKE_HEAD_DOWN);
-        board.getSnake().addCellAndRemoveTail(newHead);
-
-        board.clearAndDraw();
+        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY() + 1,
+                board.getSnake().getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_DOWN);
     }
 
     public void moveLeft(View view) {
-        Cell snakeHead = board.getSnake().getSnakeHead();
-        snakeHead.setCellType(CellType.SNAKE_BODY);
-
-        Cell newHead = board.getCage().cells[snakeHead.getY()][snakeHead.getX() - 1];
-        newHead.setCellType(CellType.SNAKE_HEAD_LEFT);
-        board.getSnake().addCellAndRemoveTail(newHead);
-
-        board.clearAndDraw();
+        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY(),
+                board.getSnake().getSnakeHeadAndTurnIntoBody().getX() - 1, CellType.SNAKE_HEAD_LEFT);
     }
 
     public void moveRight(View view) {
-        Cell snakeHead = board.getSnake().getSnakeHead();
-        snakeHead.setCellType(CellType.SNAKE_BODY);
+        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY(),
+                board.getSnake().getSnakeHeadAndTurnIntoBody().getX() + 1, CellType.SNAKE_HEAD_RIGHT);
+    }
 
-        Cell newHead = board.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1];
-        newHead.setCellType(CellType.SNAKE_HEAD_RIGHT);
-        board.getSnake().addCellAndRemoveTail(newHead);
+    private void makeNewHead(int Y, int X, CellType cellType) {
+        board.getLevelHolder().getLevel().increaseMoveCount();
+        Cell newHead = board.getCage().cells[Y][X];
+        if (newHead.isMoveToNextLevel()) {
+            board.getLevelHolder().loadNextLevel();
+            newHead.setMoveToNextLevel(false);
+        }
+        board.getSnake().addCell(newHead);
+        newHead.setCellType(cellType);
 
         board.clearAndDraw();
     }

@@ -40,15 +40,23 @@ public class Snake {
     }
 
     public Cell getSnakeHead() {
-
         return snakeBody.get(snakeBody.size() - 1);
+    }
+
+    public Cell getSnakeHeadAndTurnIntoBody() {
+
+        Cell snakeHead = getSnakeHead();
+        snakeHead.setCellType(CellType.SNAKE_BODY);
+        return snakeHead;
 
     }
 
-    public void addCellAndRemoveTail(Cell cell) {
+    public void addCell(Cell cell) {
         snakeBody.add(cell);
-        snakeBody.get(0).setCellType(CellType.EMPTY);
-        snakeBody.remove(0);
+        if (cell.getCellType() != CellType.FOOD) {
+            snakeBody.get(0).setCellType(CellType.EMPTY);
+            snakeBody.remove(0);
+        }
 
     }
 

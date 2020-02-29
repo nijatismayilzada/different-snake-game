@@ -5,12 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.thepot.differentsnakegame.level.LevelHolder;
 import com.thepot.differentsnakegame.model.Cage;
+import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.Snake;
 
 import static android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -26,6 +29,7 @@ public class Board {
     private Snake snake;
     private Cage cage;
     private Rect border;
+    private LevelHolder levelHolder;
 
 
     public Board(AppCompatActivity context) {
@@ -44,6 +48,7 @@ public class Board {
                         int height = mImageView.getMeasuredHeight();
 
                         cage = new Cage(width, height);
+                        levelHolder = new LevelHolder(cage);
                         mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                         mImageView.setImageBitmap(mBitmap);
 
@@ -68,12 +73,47 @@ public class Board {
         return cage;
     }
 
+    public LevelHolder getLevelHolder() {
+        return levelHolder;
+    }
+
     public void clearAndDraw() {
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
         snake.drawSnake(activity, canvas);
+        levelHolder.drawLevel(activity, canvas);
         canvas.drawRect(border, boardPaint);
+        updateButtons();
         mImageView.invalidate();
+    }
+
+    private void updateButtons() {
+
+        ImageButton upButton = activity.findViewById(R.id.upButton);
+        upButton.setClickable(true);
+        ImageButton downButton = activity.findViewById(R.id.downButton);
+        downButton.setClickable(true);
+        ImageButton leftButton = activity.findViewById(R.id.leftButton);
+        leftButton.setClickable(true);
+        ImageButton rightButton = activity.findViewById(R.id.rightButton);
+        rightButton.setClickable(true);
+
+        Cell snakeHead = snake.getSnakeHead();
+
+        if (snakeHead.getY() - 1 < 0 || cage.cells[snakeHead.getY() - 1][snakeHead.getX()].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
+            upButton.setClickable(false);
+        }
+        if (snakeHead.getY() + 1 > CELL_MAX_ID || cage.cells[snakeHead.getY() + 1][snakeHead.getX()].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
+            downButton.setClickable(false);
+        }
+        if (snakeHead.getX() - 1 < 0 || cage.cells[snakeHead.getY()][snakeHead.getX() - 1].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
+            leftButton.setClickable(false);
+        }
+        if (snakeHead.getX() + 1 > CELL_MAX_ID || cage.cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
+            rightButton.setClickable(false);
+        }
+
+
     }
 
 
