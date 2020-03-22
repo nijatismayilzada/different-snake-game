@@ -34,6 +34,9 @@ public class Level {
 
     public boolean noMovesLeft() {
         return moveCount >= maxMoves;
+    }
 
+    public int getMovesLeft() {
+        return maxMoves - moveCount;
     }
 }

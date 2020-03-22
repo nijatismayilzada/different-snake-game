@@ -18,9 +18,7 @@
         <ImageView
             android:id="@+id/boardHolder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -30,42 +28,71 @@
         android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:textSize="22sp"
+            android:layout_marginStart="@dimen/marginMini"
+            android:layout_marginTop="@dimen/marginMini"
+            android:fontFamily="@font/press_start_2p"
+            android:text="@string/level"
             android:textColor="@color/colorBoardLine"
-            android:text="LEVEL:"/>
+            android:textSize="@dimen/bigText" />
 
         <TextView
+            android:id="@+id/levelHolder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:textSize="22sp"
+            android:layout_marginTop="@dimen/marginMini"
+            android:layout_toEndOf="@id/level"
+            android:fontFamily="@font/press_start_2p"
             android:textColor="@color/colorBoardLine"
-            android:text="MOVES"/>
+            android:textSize="@dimen/bigText" />
 
-        <ImageButton
-            android:id="@+id/restart"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/upButton"
-            android:layout_marginTop="@dimen/buttonMargin"
-            android:layout_width="@dimen/button"
-            android:layout_height="@dimen/button"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px" />
-
-        <ImageButton
-            android:id="@+id/options"
+        <TextView
+            android:id="@+id/moves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/marginMini"
+            android:layout_marginEnd="@dimen/marginMini"
+            android:fontFamily="@font/press_start_2p"
+            android:text="@string/moves"
+            android:textColor="@color/colorBoardLine"
+            android:textSize="@dimen/bigText" />
+
+        <TextView
+            android:id="@+id/movesHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginMini"
+            android:layout_toStartOf="@id/moves"
+            android:fontFamily="@font/press_start_2p"
+            android:textColor="@color/colorBoardLine"
+            android:textSize="@dimen/bigText" />
+
+        <ImageButton
+            android:id="@+id/replay"
+            android:layout_width="@dimen/buttonSmall"
+            android:layout_height="@dimen/buttonSmall"
             android:layout_below="@id/upButton"
-            android:layout_marginTop="@dimen/buttonMargin"
-            android:layout_width="@dimen/button"
-            android:layout_height="@dimen/button"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/buttonMargin10"
+            android:layout_marginTop="@dimen/buttonMargin20"
+            android:background="@drawable/ic_replay_white_24dp"
+            android:rotation="270" />
+
+        <ImageButton
+            android:id="@+id/menu"
+            android:layout_width="@dimen/buttonSmall"
+            android:layout_height="@dimen/buttonSmall"
+            android:layout_below="@id/upButton"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/buttonMargin20"
+            android:layout_marginEnd="@dimen/buttonMargin10"
+            android:background="@drawable/ic_menu_open_white_24dp" />
 
         <ImageButton
             android:id="@+id/upButton"

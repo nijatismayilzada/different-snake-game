@@ -24,6 +24,10 @@ public class LevelHolder {
         loadLevel();
     }
 
+    public int getActiveLevel() {
+        return activeLevel;
+    }
+
     public void loadNextLevel() {
         activeLevel++;
         loadLevel();

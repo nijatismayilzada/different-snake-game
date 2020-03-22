@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -30,39 +31,62 @@ public class Board {
     private Cage cage;
     private Rect border;
     private LevelHolder levelHolder;
+    private TextView levelHolderText;
+    private int width;
+    private int height;
+    private TextView movesHolderText;
+    private ImageButton upButton;
+    private ImageButton downButton;
+    private ImageButton leftButton;
+    private ImageButton rightButton;
 
 
     public Board(AppCompatActivity context) {
         activity = context;
 
         mImageView = context.findViewById(R.id.boardHolder);
+        mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
 
+        upButton = activity.findViewById(R.id.upButton);
+        downButton = activity.findViewById(R.id.downButton);
+        leftButton = activity.findViewById(R.id.leftButton);
+        rightButton = activity.findViewById(R.id.rightButton);
+        movesHolderText = activity.findViewById(R.id.movesHolder);
+        levelHolderText = activity.findViewById(R.id.levelHolder);
+
+        boardPaint = new Paint();
+        boardPaint.setStyle(Paint.Style.STROKE);
+        boardPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBoardLine, null));
         final ViewTreeObserver observer = mImageView.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(
                 new OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
 
-                        int width = mImageView.getMeasuredWidth();
-                        int height = mImageView.getMeasuredHeight();
+                        if (width == 0) {
+                            width = mImageView.getMeasuredWidth();
+                            height = mImageView.getMeasuredHeight();
 
-                        cage = new Cage(width, height);
-                        levelHolder = new LevelHolder(cage);
-                        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                        mImageView.setImageBitmap(mBitmap);
-
-                        snake = new Snake(cage);
-                        boardPaint = new Paint();
-                        boardPaint.setStyle(Paint.Style.STROKE);
-                        boardPaint.setStrokeWidth(cage.cellSize / 10);
-                        boardPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBoardLine, null));
-                        Rect startRect = cage.cells[CELL_MIN_ID][CELL_MIN_ID].getRect();
-                        Rect endRect = cage.cells[CELL_MAX_ID][CELL_MAX_ID].getRect();
-                        border = new Rect(startRect.left, startRect.top, endRect.right, endRect.bottom);
-                        clearAndDraw();
+                            setup(width, height);
+                        }
                     }
                 });
+    }
+
+    private void setup(int width, int height) {
+        mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        mImageView.setImageBitmap(mBitmap);
+
+        cage = new Cage(width, height);
+        levelHolder = new LevelHolder(cage);
+        snake = new Snake(cage);
+
+        Rect startRect = cage.cells[CELL_MIN_ID][CELL_MIN_ID].getRect();
+        Rect endRect = cage.cells[CELL_MAX_ID][CELL_MAX_ID].getRect();
+        border = new Rect(startRect.left, startRect.top, endRect.right, endRect.bottom);
+
+        boardPaint.setStrokeWidth(cage.cellSize / 10);
+        clearAndDraw();
     }
 
     public Snake getSnake() {
@@ -78,24 +102,26 @@ public class Board {
     }
 
     public void clearAndDraw() {
+
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
         snake.drawSnake(activity, canvas);
         levelHolder.drawLevel(activity, canvas);
         canvas.drawRect(border, boardPaint);
         updateButtons();
+
+        movesHolderText.setText(String.valueOf(levelHolder.getLevel().getMovesLeft()));
+
+        levelHolderText.setText(String.valueOf(levelHolder.getActiveLevel()));
+
         mImageView.invalidate();
     }
 
     private void updateButtons() {
 
-        ImageButton upButton = activity.findViewById(R.id.upButton);
         upButton.setClickable(true);
-        ImageButton downButton = activity.findViewById(R.id.downButton);
         downButton.setClickable(true);
-        ImageButton leftButton = activity.findViewById(R.id.leftButton);
         leftButton.setClickable(true);
-        ImageButton rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setClickable(true);
 
         Cell snakeHead = snake.getSnakeHead();
@@ -112,7 +138,6 @@ public class Board {
         if (snakeHead.getX() + 1 > CELL_MAX_ID || cage.cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
             rightButton.setClickable(false);
         }
-
 
     }
 

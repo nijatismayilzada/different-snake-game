@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button">60dp</dimen>
+    <dimen name="buttonSmall">46dp</dimen>
     <dimen name="buttonMargin">22dp</dimen>
+    <dimen name="buttonMargin20">20dp</dimen>
+    <dimen name="buttonMargin10">10dp</dimen>
+    <dimen name="marginMini">8dp</dimen>
+    <dimen name="bigText">15sp</dimen>
 </resources>
