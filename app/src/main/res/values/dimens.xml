@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button">60dp</dimen>
-    <dimen name="buttonMargin">30dp</dimen>
+    <dimen name="buttonMargin">22dp</dimen>
 </resources>
