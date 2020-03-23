@@ -1,9 +1,11 @@
 package com.thepot.differentsnakegame;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.thepot.differentsnakegame.level.LevelHolder;
 import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;
+import com.thepot.differentsnakegame.model.CellType;
 import com.thepot.differentsnakegame.model.Snake;
 
 import static android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -39,18 +42,65 @@ public class Board {
     private ImageButton downButton;
     private ImageButton leftButton;
     private ImageButton rightButton;
+    private ImageButton menuButton;
+    private Intent mainIntent;
 
 
-    public Board(AppCompatActivity context) {
+    public Board(final AppCompatActivity context) {
         activity = context;
 
         mImageView = context.findViewById(R.id.boardHolder);
         mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
 
         upButton = activity.findViewById(R.id.upButton);
+        upButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeNewHead(snake.getSnakeHeadAndTurnIntoBody().getY() - 1,
+                        snake.getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
+
+            }
+        });
         downButton = activity.findViewById(R.id.downButton);
+        downButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeNewHead(snake.getSnakeHeadAndTurnIntoBody().getY() + 1,
+                        snake.getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_DOWN);
+
+            }
+        });
         leftButton = activity.findViewById(R.id.leftButton);
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makeNewHead(snake.getSnakeHeadAndTurnIntoBody().getY(),
+                        snake.getSnakeHeadAndTurnIntoBody().getX() - 1, CellType.SNAKE_HEAD_LEFT);
+            }
+        });
         rightButton = activity.findViewById(R.id.rightButton);
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makeNewHead(snake.getSnakeHeadAndTurnIntoBody().getY(),
+                        snake.getSnakeHeadAndTurnIntoBody().getX() + 1, CellType.SNAKE_HEAD_RIGHT);
+            }
+        });
+
+        menuButton = activity.findViewById(R.id.menu);
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (mainIntent == null) {
+                    mainIntent = new Intent(context, MainActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                }
+                context.startActivity(mainIntent);
+            }
+        });
+
+
         movesHolderText = activity.findViewById(R.id.movesHolder);
         levelHolderText = activity.findViewById(R.id.levelHolder);
 
@@ -89,19 +139,7 @@ public class Board {
         clearAndDraw();
     }
 
-    public Snake getSnake() {
-        return snake;
-    }
-
-    public Cage getCage() {
-        return cage;
-    }
-
-    public LevelHolder getLevelHolder() {
-        return levelHolder;
-    }
-
-    public void clearAndDraw() {
+    private void clearAndDraw() {
 
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
@@ -117,9 +155,23 @@ public class Board {
         mImageView.invalidate();
     }
 
+    private void makeNewHead(int Y, int X, CellType cellType) {
+        levelHolder.getLevel().increaseMoveCount();
+        Cell newHead = cage.cells[Y][X];
+        if (newHead.isMoveToNextLevel()) {
+            levelHolder.loadNextLevel();
+            newHead.setMoveToNextLevel(false);
+        }
+        snake.addCell(newHead);
+        newHead.setCellType(cellType);
+
+        clearAndDraw();
+    }
+
     private void updateButtons() {
 
         upButton.setClickable(true);
+
         downButton.setClickable(true);
         leftButton.setClickable(true);
         rightButton.setClickable(true);

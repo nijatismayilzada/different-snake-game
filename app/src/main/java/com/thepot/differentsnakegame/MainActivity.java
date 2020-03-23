@@ -1,17 +1,17 @@
 package com.thepot.differentsnakegame;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thepot.differentsnakegame.model.Cell;
-import com.thepot.differentsnakegame.model.CellType;
-
 public class MainActivity extends AppCompatActivity {
 
-    private Board board;
-
+    private Button button;
+    private Intent gameIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,42 +19,19 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        board = new Board(this);
+        button = findViewById(R.id.specialButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(gameIntent==null) {
+                    gameIntent = new Intent(MainActivity.this, GameActivity.class);
+                    gameIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                }
+                startActivity(gameIntent);
+            }
+        });
+
+
     }
-
-
-    public void moveUp(View view) {
-        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY() - 1,
-                board.getSnake().getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
-    }
-
-    public void moveDown(View view) {
-        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY() + 1,
-                board.getSnake().getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_DOWN);
-    }
-
-    public void moveLeft(View view) {
-        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY(),
-                board.getSnake().getSnakeHeadAndTurnIntoBody().getX() - 1, CellType.SNAKE_HEAD_LEFT);
-    }
-
-    public void moveRight(View view) {
-        makeNewHead(board.getSnake().getSnakeHeadAndTurnIntoBody().getY(),
-                board.getSnake().getSnakeHeadAndTurnIntoBody().getX() + 1, CellType.SNAKE_HEAD_RIGHT);
-    }
-
-    private void makeNewHead(int Y, int X, CellType cellType) {
-        board.getLevelHolder().getLevel().increaseMoveCount();
-        Cell newHead = board.getCage().cells[Y][X];
-        if (newHead.isMoveToNextLevel()) {
-            board.getLevelHolder().loadNextLevel();
-            newHead.setMoveToNextLevel(false);
-        }
-        board.getSnake().addCell(newHead);
-        newHead.setCellType(cellType);
-
-        board.clearAndDraw();
-    }
-
 
 }
