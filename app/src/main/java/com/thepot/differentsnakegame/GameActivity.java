@@ -1,21 +1,20 @@
 package com.thepot.differentsnakegame;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+import com.thepot.differentsnakegame.clicklistener.BoardHolderObserver;
 
-    private Board board;
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        if (board == null) {
-            board = new Board(this);
-        }
+        ImageView boardHolder = this.findViewById(R.id.boardHolder);
+        boardHolder.getViewTreeObserver().addOnGlobalLayoutListener(new BoardHolderObserver(GameActivity.this, boardHolder));
     }
 
     @Override

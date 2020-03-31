@@ -2,10 +2,13 @@ package com.thepot.differentsnakegame.level;
 
 import android.annotation.SuppressLint;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
+import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.CellType;
