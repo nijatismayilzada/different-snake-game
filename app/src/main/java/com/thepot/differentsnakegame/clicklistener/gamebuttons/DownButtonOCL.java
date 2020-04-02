@@ -1,4 +1,4 @@
-package com.thepot.differentsnakegame.clicklistener;
+package com.thepot.differentsnakegame.clicklistener.gamebuttons;
 
 import android.view.View;
 
@@ -6,7 +6,7 @@ import com.thepot.differentsnakegame.model.CellType;
 import com.thepot.differentsnakegame.model.Snake;
 import com.thepot.differentsnakegame.service.MovingService;
 
-import static android.view.View.*;
+import static android.view.View.OnClickListener;
 
 public class DownButtonOCL implements OnClickListener {
     private Snake snake;

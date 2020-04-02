@@ -7,4 +7,5 @@
     <dimen name="buttonMargin10">10dp</dimen>
     <dimen name="marginMini">8dp</dimen>
     <dimen name="bigText">15sp</dimen>
+    <dimen name="mainMenuText">30sp</dimen>
 </resources>

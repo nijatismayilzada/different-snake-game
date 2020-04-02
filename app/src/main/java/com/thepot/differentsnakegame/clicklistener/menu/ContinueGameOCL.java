@@ -1,4 +1,4 @@
-package com.thepot.differentsnakegame.clicklistener;
+package com.thepot.differentsnakegame.clicklistener.menu;
 
 import android.content.Intent;
 import android.view.View;
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.GameActivity;
 
-public class StartGameOCL implements View.OnClickListener {
+public class ContinueGameOCL implements View.OnClickListener {
     private AppCompatActivity activity;
 
-    public StartGameOCL(final AppCompatActivity activity) {
+    public ContinueGameOCL(final AppCompatActivity activity) {
         this.activity = activity;
     }
 

@@ -1,4 +1,4 @@
-package com.thepot.differentsnakegame.clicklistener;
+package com.thepot.differentsnakegame.clicklistener.gamebuttons;
 
 import android.content.Intent;
 import android.view.View;

@@ -1,15 +1,14 @@
 package com.thepot.differentsnakegame.service;
 
-import android.graphics.Canvas;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.R;
-import com.thepot.differentsnakegame.clicklistener.DownButtonOCL;
-import com.thepot.differentsnakegame.clicklistener.LeftButtonOCL;
-import com.thepot.differentsnakegame.clicklistener.RightButtonOCL;
-import com.thepot.differentsnakegame.clicklistener.UpButtonOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.DownButtonOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.LeftButtonOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.RightButtonOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.UpButtonOCL;
 import com.thepot.differentsnakegame.level.LevelHolder;
 import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;

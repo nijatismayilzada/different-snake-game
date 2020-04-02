@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thepot.differentsnakegame.clicklistener.StartGameOCL;
+import com.thepot.differentsnakegame.clicklistener.menu.ContinueGameOCL;
+import com.thepot.differentsnakegame.clicklistener.menu.ExitGameOCL;
+import com.thepot.differentsnakegame.clicklistener.menu.StartGameOCL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,14 +25,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
 
-
                 hideSystemUI();
                 view.performClick();
                 return view.onTouchEvent(event);
 
             }
         });
-        this.<Button>findViewById(R.id.specialButton).setOnClickListener(new StartGameOCL(this));
+        this.<TextView>findViewById(R.id.newGame).setOnClickListener(new StartGameOCL(this));
+        this.<TextView>findViewById(R.id.continueGame).setOnClickListener(new ContinueGameOCL(this));
+        this.<TextView>findViewById(R.id.exit).setOnClickListener(new ExitGameOCL(this));
     }
 
     private void hideSystemUI() {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
+    // except for the ones that make the content appear under the system bars.
     private void showSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
