@@ -9,7 +9,7 @@ public class Cage {
     public static final int CELL_MIN_ID = 0;
 
     public Cell[][] cells;
-    public final int cellSize;
+    public int cellSize;
 
 
     public Cage(int availableWidth, int availableHeight) {
@@ -43,5 +43,12 @@ public class Cage {
             yCoordinate += cellSize;
             xCoordinate = startX;
         }
+    }
+
+    public Cage() {
+    }
+
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
     }
 }
