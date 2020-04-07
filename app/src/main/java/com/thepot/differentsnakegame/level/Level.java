@@ -9,6 +9,7 @@ public class Level {
 
     private List<Cell> foods;
     private List<Cell> walls;
+    private Cell moveToNextLevel;
     private int maxMoves;
     private int moveCount;
 
@@ -26,6 +27,14 @@ public class Level {
 
     public List<Cell> getWalls() {
         return walls;
+    }
+
+    public Cell getMoveToNextLevel() {
+        return moveToNextLevel;
+    }
+
+    public void setMoveToNextLevel(Cell moveToNextLevel) {
+        this.moveToNextLevel = moveToNextLevel;
     }
 
     public void increaseMoveCount() {

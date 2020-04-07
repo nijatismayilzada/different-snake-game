@@ -55,7 +55,7 @@ public class LevelHolder {
 
         Cell food = cage.cells[10][13];
         food.setCellType(CellType.FOOD);
-        food.setMoveToNextLevel(true);
+        level.setMoveToNextLevel(food);
         level.getFoods().add(food);
 
 
@@ -67,7 +67,7 @@ public class LevelHolder {
 
         Cell food = cage.cells[3][13];
         food.setCellType(CellType.FOOD);
-        food.setMoveToNextLevel(true);
+        level.setMoveToNextLevel(food);
         level.getFoods().add(food);
 
 

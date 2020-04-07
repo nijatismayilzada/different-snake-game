@@ -29,7 +29,6 @@ public class Cage {
                 cell.setX(x);
                 cell.setY(y);
                 cell.setCellType(CellType.EMPTY);
-                cell.setMoveToNextLevel(false);
 
                 Rect rect = new Rect();
                 rect.set(xCoordinate, yCoordinate, xCoordinate + cellSize, yCoordinate + cellSize);

@@ -16,7 +16,6 @@ import static com.thepot.differentsnakegame.model.Cage.CELL_COUNT;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_TYPE;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_X;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_Y;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_MOVE_TO_NEXT_LEVEL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.TABLE_CELL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.DATABASE_NAME;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.DATABASE_VERSION;
@@ -26,8 +25,7 @@ public class CellRepository extends SQLiteOpenHelper {
     private static final String CREATE_CELL_TABLE = "CREATE TABLE " + TABLE_CELL + " (" +
             COLUMN_CELL_X + " INTEGER, " +
             COLUMN_CELL_Y + " INTEGER, " +
-            COLUMN_CELL_TYPE + " TEXT, " +
-            COLUMN_MOVE_TO_NEXT_LEVEL + " INTEGER)";
+            COLUMN_CELL_TYPE + " TEXT)";
 
     private SQLiteDatabase db;
 
@@ -53,10 +51,16 @@ public class CellRepository extends SQLiteOpenHelper {
                 values.put(COLUMN_CELL_X, cell.getX());
                 values.put(COLUMN_CELL_Y, cell.getY());
                 values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
-                values.put(COLUMN_MOVE_TO_NEXT_LEVEL, cell.isMoveToNextLevel());
                 db.insert(TABLE_CELL, null, values);
             }
         }
+    }
+
+    public boolean cageExists() {
+        Cursor cursor = db.query(TABLE_CELL, null, null, null, null, null, null);
+        boolean cageExists = cursor.moveToNext();
+        cursor.close();
+        return cageExists;
     }
 
     public Cage getPlainCage() {
@@ -72,7 +76,6 @@ public class CellRepository extends SQLiteOpenHelper {
                 cell.setX(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_X)));
                 cell.setY(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_Y)));
                 cell.setCellType(CellType.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_CELL_TYPE))));
-                cell.setMoveToNextLevel(cursor.getInt(cursor.getColumnIndex(COLUMN_MOVE_TO_NEXT_LEVEL)) == 1);
                 cells[y][x] = cell;
             }
         }
@@ -86,7 +89,6 @@ public class CellRepository extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
-        values.put(COLUMN_MOVE_TO_NEXT_LEVEL, cell.isMoveToNextLevel());
 
         String selection = COLUMN_CELL_X + " = ? AND " + COLUMN_CELL_Y + " = ? ";
         String[] selectionArgs = {String.valueOf(cell.getX()), String.valueOf(cell.getY())};

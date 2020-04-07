@@ -15,7 +15,6 @@ class DatabaseDetails {
         static final String COLUMN_CELL_X = "cell_x";
         static final String COLUMN_CELL_Y = "cell_y";
         static final String COLUMN_CELL_TYPE = "cell_type";
-        static final String COLUMN_MOVE_TO_NEXT_LEVEL = "move_to_next_level";
     }
 
     static class LevelTable implements BaseColumns {

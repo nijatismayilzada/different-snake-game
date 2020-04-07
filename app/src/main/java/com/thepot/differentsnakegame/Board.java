@@ -13,10 +13,10 @@ import com.thepot.differentsnakegame.clicklistener.gamebuttons.MenuButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.ReplayButtonOCL;
 import com.thepot.differentsnakegame.level.LevelHolder;
 import com.thepot.differentsnakegame.model.Cage;
-import com.thepot.differentsnakegame.model.Snake;
 import com.thepot.differentsnakegame.service.BorderService;
 import com.thepot.differentsnakegame.service.ButtonService;
 import com.thepot.differentsnakegame.service.MovingService;
+import com.thepot.differentsnakegame.service.SnakeService;
 
 public class Board {
     private int mColorBackground;
@@ -26,7 +26,7 @@ public class Board {
     private LevelHolder levelHolder;
     private TextView levelHolderText;
     private TextView movesHolderText;
-    private Snake snake;
+    private SnakeService snakeService;
     private BorderService borderService;
     private ButtonService buttonService;
     private Cage cage;
@@ -54,16 +54,16 @@ public class Board {
     public void initialiseServices(AppCompatActivity context, ImageView boardHolder) {
         cage = new Cage(boardHolder.getMeasuredWidth(), boardHolder.getMeasuredHeight());
         levelHolder = new LevelHolder(cage);
-        snake = new Snake(cage);
-        movingService = new MovingService(levelHolder, cage, snake, this);
+        snakeService = new SnakeService(cage);
+        movingService = new MovingService(levelHolder, cage, snakeService, this);
         borderService = new BorderService(context, cage);
-        buttonService = new ButtonService(activity, movingService, cage, snake, levelHolder);
+        buttonService = new ButtonService(activity, movingService, cage, snakeService, levelHolder);
     }
 
     public void clearAndDraw() {
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
-        snake.drawSnake(activity, canvas);
+        snakeService.drawSnake(activity, canvas);
         levelHolder.drawLevel(activity, canvas);
         borderService.drawBorder(canvas);
         buttonService.updateButtons();

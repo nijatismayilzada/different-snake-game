@@ -12,7 +12,6 @@ import com.thepot.differentsnakegame.clicklistener.gamebuttons.UpButtonOCL;
 import com.thepot.differentsnakegame.level.LevelHolder;
 import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;
-import com.thepot.differentsnakegame.model.Snake;
 
 import static com.thepot.differentsnakegame.model.Cage.CELL_MAX_ID;
 
@@ -23,22 +22,22 @@ public class ButtonService {
     private ImageButton rightButton;
 
     private Cage cage;
-    private Snake snake;
+    private SnakeService snakeService;
     private LevelHolder levelHolder;
 
-    public ButtonService(AppCompatActivity activity, MovingService movingService, Cage cage, Snake snake, LevelHolder levelHolder) {
+    public ButtonService(AppCompatActivity activity, MovingService movingService, Cage cage, SnakeService snakeService, LevelHolder levelHolder) {
         this.cage = cage;
-        this.snake = snake;
+        this.snakeService = snakeService;
         this.levelHolder = levelHolder;
 
         upButton = activity.findViewById(R.id.upButton);
-        upButton.setOnClickListener(new UpButtonOCL(snake, movingService));
+        upButton.setOnClickListener(new UpButtonOCL(snakeService, movingService));
         downButton = activity.findViewById(R.id.downButton);
-        downButton.setOnClickListener(new DownButtonOCL(snake, movingService));
+        downButton.setOnClickListener(new DownButtonOCL(snakeService, movingService));
         leftButton = activity.findViewById(R.id.leftButton);
-        leftButton.setOnClickListener(new LeftButtonOCL(snake, movingService));
+        leftButton.setOnClickListener(new LeftButtonOCL(snakeService, movingService));
         rightButton = activity.findViewById(R.id.rightButton);
-        rightButton.setOnClickListener(new RightButtonOCL(snake, movingService));
+        rightButton.setOnClickListener(new RightButtonOCL(snakeService, movingService));
     }
 
     public void updateButtons() {
@@ -48,7 +47,7 @@ public class ButtonService {
         leftButton.setClickable(true);
         rightButton.setClickable(true);
 
-        Cell snakeHead = snake.getSnakeHead();
+        Cell snakeHead = snakeService.getSnakeHead();
 
         if (snakeHead.getY() - 1 < 0 || cage.cells[snakeHead.getY() - 1][snakeHead.getX()].getCellType().isNotActionable() || levelHolder.getLevel().noMovesLeft()) {
             upButton.setClickable(false);
