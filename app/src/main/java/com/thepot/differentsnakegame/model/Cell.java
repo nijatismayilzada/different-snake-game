@@ -2,10 +2,11 @@ package com.thepot.differentsnakegame.model;
 
 import android.graphics.Rect;
 
-public class Cell {
+public class Cell implements Comparable<Cell> {
     private int x;
     private int y;
     private CellType cellType;
+    private int indexInGroup;
     private Rect rect;
 
     public Cell() {
@@ -35,11 +36,24 @@ public class Cell {
         this.cellType = cellType;
     }
 
+    public int getIndexInGroup() {
+        return indexInGroup;
+    }
+
+    public void setIndexInGroup(int indexInGroup) {
+        this.indexInGroup = indexInGroup;
+    }
+
     public Rect getRect() {
         return rect;
     }
 
     public void setRect(Rect rect) {
         this.rect = rect;
+    }
+
+    @Override
+    public int compareTo(Cell o) {
+        return this.indexInGroup - o.indexInGroup;
     }
 }

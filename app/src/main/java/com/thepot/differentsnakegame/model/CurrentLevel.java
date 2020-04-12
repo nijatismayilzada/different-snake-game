@@ -1,4 +1,4 @@
-package com.thepot.differentsnakegame.level;
+package com.thepot.differentsnakegame.model;
 
 public class CurrentLevel {
     private int currentLevel;

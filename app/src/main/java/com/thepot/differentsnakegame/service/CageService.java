@@ -11,9 +11,13 @@ import com.thepot.differentsnakegame.repository.CellRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thepot.differentsnakegame.model.Cage.CELL_COUNT;
+import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 
 public class CageService {
+    public static final int CELL_COUNT = 20;
+    public static final int CELL_MAX_ID = CELL_COUNT - 1;
+    public static final int CELL_MIN_ID = 0;
+    public static final int CELL_NO_POSITION = -1;
     private CellRepository cellRepository;
     private ImageView boardHolder;
 
@@ -27,9 +31,18 @@ public class CageService {
         this.boardHolder = boardHolder;
     }
 
-    public void updateCellTypeForCell(Cell cell, CellType cellType) {
+    public void updateCellTypeAndIndex(Cell cell, CellType cellType, int indexInGroup) {
         cell.setCellType(cellType);
+        cell.setIndexInGroup(indexInGroup);
         cellRepository.updateCell(cell);
+    }
+
+    public void updateCellType(Cell cell, CellType cellType) {
+        updateCellTypeAndIndex(cell, cellType, cell.getIndexInGroup());
+    }
+
+    public void updateCellIndex(Cell cell, int indexInGroup) {
+        updateCellTypeAndIndex(cell, cell.getCellType(), indexInGroup);
     }
 
     public List<Cell> findCellsOfTypes(CellType... cellTypes) {
@@ -77,7 +90,8 @@ public class CageService {
         Cell cell = new Cell();
         cell.setX(x);
         cell.setY(y);
-        cell.setCellType(CellType.EMPTY);
+        cell.setCellType(EMPTY);
+        cell.setIndexInGroup(CELL_NO_POSITION);
         return cell;
     }
 

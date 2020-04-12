@@ -10,6 +10,7 @@ public enum CellType {
     SNAKE_HEAD_RIGHT(R.drawable.ic_backspace_24px_right, false),
     SNAKE_BODY(R.drawable.ic_add_box_24px, false),
     FOOD(R.drawable.ic_add_circle_24px, true),
+    FOOD_MOVE_TO_NEXT_LEVEL(R.drawable.ic_add_circle_24px, true),
     WALL(R.drawable.ic_wall_24px, false);
 
 

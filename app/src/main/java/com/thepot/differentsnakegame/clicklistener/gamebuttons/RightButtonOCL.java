@@ -3,21 +3,18 @@ package com.thepot.differentsnakegame.clicklistener.gamebuttons;
 import android.view.View;
 
 import com.thepot.differentsnakegame.model.CellType;
-import com.thepot.differentsnakegame.service.MovingService;
 import com.thepot.differentsnakegame.service.SnakeService;
 
-public class RightButtonOCL  implements View.OnClickListener {
+public class RightButtonOCL implements View.OnClickListener {
     private SnakeService snakeService;
-    private MovingService movingService;
 
-    public RightButtonOCL(SnakeService snakeService, MovingService movingService) {
+    public RightButtonOCL(SnakeService snakeService) {
         this.snakeService = snakeService;
-        this.movingService = movingService;
     }
 
     @Override
     public void onClick(View v) {
-        movingService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY(),
+        snakeService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY(),
                 snakeService.getSnakeHeadAndTurnIntoBody().getX() + 1, CellType.SNAKE_HEAD_RIGHT);
 
     }

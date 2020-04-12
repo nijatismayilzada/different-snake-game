@@ -1,46 +1,26 @@
 package com.thepot.differentsnakegame.repository;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
 
 import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.CellType;
 
-import static com.thepot.differentsnakegame.model.Cage.CELL_COUNT;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_INDEX_IN_GROUP;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_TYPE;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_X;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_Y;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.TABLE_CELL;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.DATABASE_NAME;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.DATABASE_VERSION;
+import static com.thepot.differentsnakegame.service.CageService.CELL_COUNT;
 
-public class CellRepository extends SQLiteOpenHelper {
-
-    private static final String CREATE_CELL_TABLE = "CREATE TABLE " + TABLE_CELL + " (" +
-            COLUMN_CELL_X + " INTEGER, " +
-            COLUMN_CELL_Y + " INTEGER, " +
-            COLUMN_CELL_TYPE + " TEXT)";
+public class CellRepository {
 
     private SQLiteDatabase db;
 
-    public CellRepository(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.db = getWritableDatabase();
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_CELL_TABLE);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public CellRepository(DatabaseDetails databaseDetails) {
+        this.db = databaseDetails.getWritableDatabase();
     }
 
     public void insertCage(Cage cage) {
@@ -51,6 +31,7 @@ public class CellRepository extends SQLiteOpenHelper {
                 values.put(COLUMN_CELL_X, cell.getX());
                 values.put(COLUMN_CELL_Y, cell.getY());
                 values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
+                values.put(COLUMN_CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
                 db.insert(TABLE_CELL, null, values);
             }
         }
@@ -76,6 +57,7 @@ public class CellRepository extends SQLiteOpenHelper {
                 cell.setX(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_X)));
                 cell.setY(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_Y)));
                 cell.setCellType(CellType.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_CELL_TYPE))));
+                cell.setIndexInGroup(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_INDEX_IN_GROUP)));
                 cells[y][x] = cell;
             }
         }
@@ -89,6 +71,7 @@ public class CellRepository extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
+        values.put(COLUMN_CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
 
         String selection = COLUMN_CELL_X + " = ? AND " + COLUMN_CELL_Y + " = ? ";
         String[] selectionArgs = {String.valueOf(cell.getX()), String.valueOf(cell.getY())};
