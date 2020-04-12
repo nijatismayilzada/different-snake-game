@@ -45,6 +45,18 @@ public class CageService {
         updateCellTypeAndIndex(cell, cell.getCellType(), indexInGroup);
     }
 
+    public void clearCells(CellType... cellTypes) {
+        for (Cell[] cellCol : getCage().cells) {
+            for (Cell cell : cellCol) {
+                for (CellType cellType : cellTypes) {
+                    if (cell.getCellType() == cellType) {
+                        updateCellTypeAndIndex(cell, EMPTY, CELL_NO_POSITION);
+                    }
+                }
+            }
+        }
+    }
+
     public List<Cell> findCellsOfTypes(CellType... cellTypes) {
         List<Cell> cellsFound = new ArrayList<>();
 

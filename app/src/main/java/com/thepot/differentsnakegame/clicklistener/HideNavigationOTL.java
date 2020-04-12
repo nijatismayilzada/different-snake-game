@@ -11,6 +11,7 @@ public class HideNavigationOTL implements View.OnTouchListener {
 
     public HideNavigationOTL(AppCompatActivity activity) {
         this.activity = activity;
+        hideSystemUI();
     }
 
     @Override

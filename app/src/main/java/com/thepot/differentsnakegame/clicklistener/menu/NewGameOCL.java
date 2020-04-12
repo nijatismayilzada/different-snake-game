@@ -6,33 +6,30 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.GameActivity;
+import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
-public class ContinueGameOCL implements View.OnClickListener {
+public class NewGameOCL implements View.OnClickListener {
+    public static final String NEW_GAME = "NEW_GAME";
     private AppCompatActivity activity;
     private LevelRepository levelRepository;
-    private View continueButton;
+    private CellRepository cellRepository;
 
-    public ContinueGameOCL(AppCompatActivity activity, LevelRepository levelRepository, View continueButton) {
+    public NewGameOCL(AppCompatActivity activity, LevelRepository levelRepository, CellRepository cellRepository) {
         this.activity = activity;
         this.levelRepository = levelRepository;
-        this.continueButton = continueButton;
-        setupButton();
+        this.cellRepository = cellRepository;
     }
 
     @Override
     public void onClick(View v) {
+        cellRepository.deleteAllCells();
+        levelRepository.deleteLevelDetails();
+
         Intent intent = new Intent(activity, GameActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        intent.putExtra(NEW_GAME, true);
         activity.startActivity(intent);
-    }
-
-    public void setupButton() {
-        continueButton.setVisibility(View.VISIBLE);
-
-        if (levelRepository.getCurrentLevelDetails() == null) {
-            continueButton.setVisibility(View.GONE);
-        }
     }
 }

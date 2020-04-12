@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.thepot.differentsnakegame.clicklistener.BoardHolderObserver;
 import com.thepot.differentsnakegame.clicklistener.HideNavigationOTL;
 
+import static com.thepot.differentsnakegame.clicklistener.menu.NewGameOCL.NEW_GAME;
+
 public class GameActivity extends AppCompatActivity {
 
     private HideNavigationOTL hideNavigationOTL;
@@ -17,6 +19,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        newGame();
+    }
+
+    private void newGame() {
         hideNavigationOTL = new HideNavigationOTL(this);
         hideNavigationOTL.hideSystemUI();
         findViewById(R.id.activity_game).setOnTouchListener(hideNavigationOTL);
@@ -37,5 +43,10 @@ public class GameActivity extends AppCompatActivity {
         hideNavigationOTL.hideSystemUI();
         super.onNewIntent(intent);
         overridePendingTransition(0, 0);
+
+        if (intent.getBooleanExtra(NEW_GAME, false)) {
+            newGame();
+        }
+
     }
 }

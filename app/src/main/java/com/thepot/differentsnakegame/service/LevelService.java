@@ -26,10 +26,7 @@ public class LevelService {
     }
 
     public boolean noMovesLeft() {
-        if (getCurrentLevel().getMovesLeft() <= 0) {
-            return true;
-        }
-        return false;
+        return getCurrentLevel().getMovesLeft() <= 0;
     }
 
     public void increaseMoveCount() {
@@ -55,10 +52,7 @@ public class LevelService {
     public void loadNextLevel() {
         currentLevel.setCurrentLevel(currentLevel.getCurrentLevel() + 1);
         levelRepository.updateCurrentLevel(currentLevel);
-        loadLevel();
-    }
-
-    private void loadLevel() {
+        cageService.clearCells(CellType.FOOD, CellType.FOOD_MOVE_TO_NEXT_LEVEL, CellType.WALL);
         switch (currentLevel.getCurrentLevel()) {
             case 1:
                 loadFirstLevel();
@@ -101,6 +95,10 @@ public class LevelService {
 
         challenge = new Challenge();
         challenge.getFoods().add(food);
+
+        Cell wall = cageService.getCage().cells[1][1];
+        cageService.updateCellType(wall, CellType.WALL);
+        challenge.getWalls().add(wall);
 
 
     }

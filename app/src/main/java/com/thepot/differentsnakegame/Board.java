@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.MenuButtonOCL;
-import com.thepot.differentsnakegame.clicklistener.gamebuttons.ReplayButtonOCL;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.DatabaseDetails;
 import com.thepot.differentsnakegame.repository.LevelRepository;
@@ -31,10 +30,6 @@ public class Board {
     private SnakeService snakeService;
     private BorderService borderService;
     private ButtonService buttonService;
-    private LevelRepository levelRepository;
-    private CageService cageService;
-    private CellRepository cellRepository;
-    private DatabaseDetails databaseDetails;
 
 
     public Board(AppCompatActivity context, ImageView boardHolder) {
@@ -46,7 +41,6 @@ public class Board {
         mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
 
         activity.<ImageButton>findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
-        activity.<ImageButton>findViewById(R.id.replay).setOnClickListener(new ReplayButtonOCL(activity, boardHolder, this));
 
         movesHolderText = activity.findViewById(R.id.movesHolder);
         levelHolderText = activity.findViewById(R.id.levelHolder);
@@ -56,10 +50,10 @@ public class Board {
     }
 
     public void initialiseServices(AppCompatActivity appCompatActivity, ImageView boardHolder) {
-        databaseDetails = new DatabaseDetails(appCompatActivity);
-        cellRepository = new CellRepository(databaseDetails);
-        cageService = new CageService(cellRepository, boardHolder);
-        levelRepository = new LevelRepository(databaseDetails);
+        DatabaseDetails databaseDetails = new DatabaseDetails(appCompatActivity);
+        CellRepository cellRepository = new CellRepository(databaseDetails);
+        CageService cageService = new CageService(cellRepository, boardHolder);
+        LevelRepository levelRepository = new LevelRepository(databaseDetails);
         levelService = new LevelService(cageService, levelRepository);
         snakeService = new SnakeService(cageService, levelService, this);
         borderService = new BorderService(appCompatActivity, cageService);

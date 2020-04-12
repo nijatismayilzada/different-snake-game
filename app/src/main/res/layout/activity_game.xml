@@ -74,16 +74,16 @@
             android:textColor="@color/colorBoardLine"
             android:textSize="@dimen/bigText" />
 
-        <ImageButton
-            android:id="@+id/replay"
-            android:layout_width="@dimen/buttonSmall"
-            android:layout_height="@dimen/buttonSmall"
-            android:layout_below="@id/upButton"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/buttonMargin10"
-            android:layout_marginTop="@dimen/buttonMargin20"
-            android:background="@drawable/ic_replay_white_24dp"
-            android:rotation="270" />
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/replay"-->
+        <!--            android:layout_width="@dimen/buttonSmall"-->
+        <!--            android:layout_height="@dimen/buttonSmall"-->
+        <!--            android:layout_below="@id/upButton"-->
+        <!--            android:layout_alignParentStart="true"-->
+        <!--            android:layout_marginStart="@dimen/buttonMargin10"-->
+        <!--            android:layout_marginTop="@dimen/buttonMargin20"-->
+        <!--            android:background="@drawable/ic_replay_white_24dp"-->
+        <!--            android:rotation="270" />-->
 
         <ImageButton
             android:id="@+id/menu"
