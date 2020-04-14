@@ -15,13 +15,16 @@ import java.util.Collections;
 import static com.thepot.differentsnakegame.service.CageService.CELL_COUNT;
 
 public class SnakeService {
+    private AppCompatActivity appCompatActivity;
     private CageService cageService;
     private LevelService levelService;
     private Board board;
 
+
     private Snake snake;
 
-    public SnakeService(CageService cageService, LevelService levelService, Board board) {
+    public SnakeService(AppCompatActivity appCompatActivity, CageService cageService, LevelService levelService, Board board) {
+        this.appCompatActivity = appCompatActivity;
         this.cageService = cageService;
         this.levelService = levelService;
         this.board = board;
@@ -36,15 +39,15 @@ public class SnakeService {
                     CellType.SNAKE_HEAD_UP));
             Collections.sort(snake.snakeBody);
             if (snake.snakeBody.isEmpty()) {
-                Cell cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 2];
+                Cell cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 5];
                 cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_BODY, 0);
                 snake.snakeBody.add(cell);
 
-                cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 1];
+                cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 4];
                 cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_BODY, 1);
                 snake.snakeBody.add(cell);
 
-                cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2];
+                cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 3];
                 cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_HEAD_RIGHT, 2);
                 snake.snakeBody.add(cell);
             }
@@ -53,7 +56,7 @@ public class SnakeService {
         return snake;
     }
 
-    public void drawSnake(AppCompatActivity appCompatActivity, Canvas canvas) {
+    public void drawSnake(Canvas canvas) {
         for (Cell cell : getSnake().snakeBody) {
             Drawable d = appCompatActivity.getResources().getDrawable(cell.getCellType().getResource(), null);
             d.setBounds(cell.getRect());
@@ -75,12 +78,17 @@ public class SnakeService {
     public void makeNewHead(int Y, int X, CellType cellType) {
         levelService.increaseMoveCount();
         Cell newHead = cageService.getCage().cells[Y][X];
-        if (newHead.getCellType() == CellType.FOOD_MOVE_TO_NEXT_LEVEL) {
-            levelService.loadNextLevel();
-        }
-        if (newHead.getCellType() != CellType.FOOD && newHead.getCellType() != CellType.FOOD_MOVE_TO_NEXT_LEVEL) {
-            cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
-            getSnake().snakeBody.remove(0);
+
+        switch (newHead.getCellType()) {
+            case FOOD_MOVE_TO_NEXT_LEVEL:
+                levelService.loadNextLevel();
+                break;
+            case FOOD:
+                break;
+            default:
+                cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
+                getSnake().snakeBody.remove(0);
+                break;
         }
 
         getSnake().snakeBody.add(newHead);

@@ -54,8 +54,8 @@ public class Board {
         CellRepository cellRepository = new CellRepository(databaseDetails);
         CageService cageService = new CageService(cellRepository, boardHolder);
         LevelRepository levelRepository = new LevelRepository(databaseDetails);
-        levelService = new LevelService(cageService, levelRepository);
-        snakeService = new SnakeService(cageService, levelService, this);
+        levelService = new LevelService(appCompatActivity, cageService, levelRepository);
+        snakeService = new SnakeService(appCompatActivity, cageService, levelService, this);
         borderService = new BorderService(appCompatActivity, cageService);
         buttonService = new ButtonService(activity, cageService, snakeService, levelService);
     }
@@ -63,8 +63,8 @@ public class Board {
     public void clearAndDraw() {
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
-        snakeService.drawSnake(activity, canvas);
-        levelService.drawLevel(activity, canvas);
+        snakeService.drawSnake(canvas);
+        levelService.drawLevel(canvas);
         borderService.drawBorder(canvas);
         buttonService.updateButtons();
 

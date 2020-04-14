@@ -14,7 +14,7 @@ import java.util.List;
 import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 
 public class CageService {
-    public static final int CELL_COUNT = 20;
+    public static final int CELL_COUNT = 15;
     public static final int CELL_MAX_ID = CELL_COUNT - 1;
     public static final int CELL_MIN_ID = 0;
     public static final int CELL_NO_POSITION = -1;
