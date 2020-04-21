@@ -1,6 +1,8 @@
 package com.thepot.differentsnakegame.service;
 
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,7 @@ public class ButtonService {
     private ImageButton downButton;
     private ImageButton leftButton;
     private ImageButton rightButton;
+    private TextView gameOver;
 
     private CageService cageService;
     private SnakeService snakeService;
@@ -36,6 +39,8 @@ public class ButtonService {
         leftButton.setOnClickListener(new LeftButtonOCL(snakeService));
         rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
+
+        gameOver = activity.findViewById(R.id.gameOver);
     }
 
     public void updateButtons() {
@@ -58,6 +63,12 @@ public class ButtonService {
         }
         if (snakeHead.getX() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelService.noMovesLeft()) {
             rightButton.setClickable(false);
+        }
+
+        if (upButton.isClickable() || downButton.isClickable() || leftButton.isClickable() || rightButton.isClickable()) {
+            gameOver.setVisibility(View.INVISIBLE);
+        } else {
+            gameOver.setVisibility(View.VISIBLE);
         }
     }
 }

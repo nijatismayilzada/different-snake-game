@@ -13,13 +13,33 @@
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/controls">
+        android:layout_above="@id/status">
 
 
         <ImageView
             android:id="@+id/boardHolder"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/controls">
+
+        <TextView
+            android:id="@+id/gameOver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/marginMini"
+            android:layout_marginTop="@dimen/marginMini"
+            android:fontFamily="@font/press_start_2p"
+            android:text="@string/game_over"
+            android:textColor="@color/colorBoardLine"
+            android:textSize="@dimen/bigText" />
+
     </RelativeLayout>
 
     <RelativeLayout

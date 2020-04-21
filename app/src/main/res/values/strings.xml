@@ -3,6 +3,7 @@
     <string name="keep_tapping">Keep tapping.</string>
     <string name="done">Done!</string>
     <string name="level">LEVEL:</string>
+    <string name="game_over">GAME OVER</string>
     <string name="moves">\ MOVES \n LEFT</string>
     <string name="new_game">NEW GAME</string>
     <string name="continue_game">CONTINUE</string>
