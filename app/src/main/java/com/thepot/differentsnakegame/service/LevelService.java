@@ -16,6 +16,7 @@ import java.util.Random;
 
 import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.FOOD_MOVE_TO_NEXT_LEVEL;
+import static com.thepot.differentsnakegame.model.CellType.POISON;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
 
 public class LevelService {
@@ -97,6 +98,15 @@ public class LevelService {
             case 4:
                 loadFourthLevel();
                 break;
+            case 5:
+                loadFifthLevel();
+                break;
+            case 6:
+                loadSixthLevel();
+                break;
+            case 7:
+                loadSeventhLevel();
+                break;
             default:
                 loadRandomFood();
                 break;
@@ -170,6 +180,89 @@ public class LevelService {
         addLevelCell(11, 9, WALL);
 
 
+    }
+
+    private void loadFifthLevel() {
+
+        updateMoveCount(16);
+
+        challenge = new Challenge();
+
+        addLevelCell(10, 4, FOOD);
+        addLevelCell(12, 3, FOOD);
+        addLevelCell(14, 3, FOOD);
+        addLevelCell(11, 3, WALL);
+        addLevelCell(11, 4, WALL);
+        addLevelCell(13, 3, WALL);
+        addLevelCell(13, 4, WALL);
+
+
+    }
+
+    private void loadSixthLevel() {
+
+        updateMoveCount(100);
+
+        challenge = new Challenge();
+
+        addLevelCell(2, 3, FOOD);
+        addLevelCell(2, 11, FOOD);
+        addLevelCell(2, 1, WALL);
+        addLevelCell(1, 1, WALL);
+        addLevelCell(1, 2, WALL);
+        addLevelCell(1, 3, WALL);
+        addLevelCell(1, 4, WALL);
+        addLevelCell(2, 4, WALL);
+        addLevelCell(3, 4, WALL);
+        addLevelCell(4, 4, WALL);
+        addLevelCell(4, 3, WALL);
+        addLevelCell(4, 2, WALL);
+        addLevelCell(4, 1, WALL);
+        addLevelCell(1, 13, WALL);
+        addLevelCell(1, 12, WALL);
+        addLevelCell(1, 11, WALL);
+        addLevelCell(1, 10, WALL);
+        addLevelCell(2, 10, WALL);
+        addLevelCell(3, 10, WALL);
+        addLevelCell(4, 10, WALL);
+        addLevelCell(4, 11, WALL);
+        addLevelCell(4, 12, WALL);
+        addLevelCell(4, 13, WALL);
+
+
+    }
+
+    private void loadSeventhLevel() {
+
+        updateMoveCount(100);
+
+        challenge = new Challenge();
+
+        addLevelCell(11, 3, FOOD);
+        addLevelCell(11, 11, FOOD);
+        addLevelCell(12, 7, POISON);
+        addLevelCell(11, 1, WALL);
+        addLevelCell(10, 1, WALL);
+        addLevelCell(10, 2, WALL);
+        addLevelCell(10, 3, WALL);
+        addLevelCell(10, 4, WALL);
+        addLevelCell(11, 4, WALL);
+        addLevelCell(12, 4, WALL);
+        addLevelCell(13, 4, WALL);
+        addLevelCell(13, 3, WALL);
+        addLevelCell(13, 2, WALL);
+        addLevelCell(13, 1, WALL);
+        addLevelCell(11, 13, WALL);
+        addLevelCell(10, 13, WALL);
+        addLevelCell(10, 12, WALL);
+        addLevelCell(10, 11, WALL);
+        addLevelCell(10, 10, WALL);
+        addLevelCell(11, 10, WALL);
+        addLevelCell(12, 10, WALL);
+        addLevelCell(13, 10, WALL);
+        addLevelCell(13, 11, WALL);
+        addLevelCell(13, 12, WALL);
+        addLevelCell(13, 13, WALL);
     }
 
 

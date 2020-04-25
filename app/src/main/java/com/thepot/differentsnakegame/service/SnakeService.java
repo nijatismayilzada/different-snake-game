@@ -84,7 +84,15 @@ public class SnakeService {
                 levelService.loadNextLevel();
                 break;
             case FOOD:
+                if (cageService.findCellsOfTypes(CellType.FOOD).size() == 1) {
+                    levelService.loadNextLevel();
+                }
                 break;
+            case POISON:
+                while (getSnake().snakeBody.size() != 2) {
+                    cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
+                    getSnake().snakeBody.remove(0);
+                }
             default:
                 cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
                 getSnake().snakeBody.remove(0);
