@@ -25,12 +25,12 @@ public class DatabaseDetails extends SQLiteOpenHelper {
             COLUMN_CELL_INDEX_IN_GROUP + " INTEGER)";
 
     private static final String CREATE_LEVEL_TABLE = "CREATE TABLE " + TABLE_LEVEL + " (" +
-            COLUMN_CURRENT_LEVEL + " INTEGER, " +
+            COLUMN_CURRENT_LEVEL + " REAL, " +
             COLUMN_MOVES_LEFT + " INTEGER)";
 
 
-    static final int DATABASE_VERSION = 1;
-    static final String DATABASE_NAME = "DifferentSnakeGame";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "DifferentSnakeGame";
 
     public DatabaseDetails(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

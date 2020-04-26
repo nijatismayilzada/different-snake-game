@@ -1,17 +1,17 @@
 package com.thepot.differentsnakegame.model;
 
 public class CurrentLevel {
-    private int currentLevel;
+    private double currentLevel;
     private int movesLeft;
 
     public CurrentLevel() {
     }
 
-    public int getCurrentLevel() {
+    public double getCurrentLevel() {
         return currentLevel;
     }
 
-    public void setCurrentLevel(int currentLevel) {
+    public void setCurrentLevel(double currentLevel) {
         this.currentLevel = currentLevel;
     }
 

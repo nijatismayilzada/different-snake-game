@@ -19,6 +19,8 @@ import com.thepot.differentsnakegame.service.CageService;
 import com.thepot.differentsnakegame.service.LevelService;
 import com.thepot.differentsnakegame.service.SnakeService;
 
+import java.util.Locale;
+
 public class Board {
     private int mColorBackground;
     private Bitmap mBitmap;
@@ -69,9 +71,16 @@ public class Board {
         buttonService.updateButtons();
 
         movesHolderText.setText(String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
-        levelHolderText.setText(String.valueOf(levelService.getCurrentLevel().getCurrentLevel()));
+        levelHolderText.setText(doubleToString(levelService.getCurrentLevel().getCurrentLevel()));
 
         boardHolder.invalidate();
+    }
+
+    private String doubleToString(double d) {
+        if (d == (long) d)
+            return String.format(Locale.getDefault(), "%d", (long) d);
+        else
+            return String.format(Locale.getDefault(), "%s", d);
     }
 
 }

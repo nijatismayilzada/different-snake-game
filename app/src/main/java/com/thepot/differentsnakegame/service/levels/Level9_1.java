@@ -1,0 +1,29 @@
+package com.thepot.differentsnakegame.service.levels;
+
+import com.thepot.differentsnakegame.service.LevelService;
+
+import static com.thepot.differentsnakegame.model.CellType.FOOD_MOVE_TO_NEXT_LEVEL;
+
+public class Level9_1 implements Level {
+    private LevelService levelService;
+
+    public Level9_1(LevelService levelService) {
+        this.levelService = levelService;
+    }
+
+    @Override
+    public void loadLevel() {
+        levelService.updateMoveCount(999);
+        levelService.addLevelCell(13, 2, FOOD_MOVE_TO_NEXT_LEVEL);
+    }
+
+    @Override
+    public double levelNumber() {
+        return 9.1;
+    }
+
+    @Override
+    public double nextLevelNumber() {
+        return 9.2;
+    }
+}

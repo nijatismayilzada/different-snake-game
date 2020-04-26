@@ -58,9 +58,12 @@ public class SnakeService {
 
     public void drawSnake(Canvas canvas) {
         for (Cell cell : getSnake().snakeBody) {
-            Drawable d = appCompatActivity.getResources().getDrawable(cell.getCellType().getResource(), null);
-            d.setBounds(cell.getRect());
-            d.draw(canvas);
+            int resource = cell.getCellType().getResource();
+            if (resource != 0) {
+                Drawable d = appCompatActivity.getResources().getDrawable(resource, null);
+                d.setBounds(cell.getRect());
+                d.draw(canvas);
+            }
         }
     }
 
@@ -76,7 +79,7 @@ public class SnakeService {
     }
 
     public void makeNewHead(int Y, int X, CellType cellType) {
-        levelService.increaseMoveCount();
+        levelService.updateMoveCount(levelService.getCurrentLevel().getMovesLeft() - 1);
         Cell newHead = cageService.getCage().cells[Y][X];
 
         switch (newHead.getCellType()) {

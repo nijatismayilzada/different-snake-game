@@ -52,16 +52,16 @@ public class ButtonService {
 
         Cell snakeHead = snakeService.getSnakeHead();
 
-        if (snakeHead.getY() - 1 < 0 || cageService.getCage().cells[snakeHead.getY() - 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.noMovesLeft()) {
+        if (snakeHead.getY() - 1 < 0 || cageService.getCage().cells[snakeHead.getY() - 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             upButton.setClickable(false);
         }
-        if (snakeHead.getY() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY() + 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.noMovesLeft()) {
+        if (snakeHead.getY() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY() + 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             downButton.setClickable(false);
         }
-        if (snakeHead.getX() - 1 < 0 || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() - 1].getCellType().isNotActionable() || levelService.noMovesLeft()) {
+        if (snakeHead.getX() - 1 < 0 || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() - 1].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             leftButton.setClickable(false);
         }
-        if (snakeHead.getX() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelService.noMovesLeft()) {
+        if (snakeHead.getX() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             rightButton.setClickable(false);
         }
 

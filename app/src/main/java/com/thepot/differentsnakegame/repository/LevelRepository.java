@@ -32,7 +32,7 @@ public class LevelRepository {
         if (cursor.moveToNext()) {
 
             CurrentLevel currentLevel = new CurrentLevel();
-            currentLevel.setCurrentLevel(cursor.getInt(cursor.getColumnIndex(COLUMN_CURRENT_LEVEL)));
+            currentLevel.setCurrentLevel(cursor.getDouble(cursor.getColumnIndex(COLUMN_CURRENT_LEVEL)));
             currentLevel.setMovesLeft(cursor.getInt(cursor.getColumnIndex(COLUMN_MOVES_LEFT)));
 
             cursor.close();
