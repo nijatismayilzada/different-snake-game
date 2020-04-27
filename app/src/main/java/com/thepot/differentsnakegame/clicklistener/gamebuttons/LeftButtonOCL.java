@@ -5,6 +5,9 @@ import android.view.View;
 import com.thepot.differentsnakegame.model.CellType;
 import com.thepot.differentsnakegame.service.SnakeService;
 
+import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
+import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
+
 public class LeftButtonOCL implements View.OnClickListener {
     private SnakeService snakeService;
 
@@ -14,8 +17,13 @@ public class LeftButtonOCL implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        snakeService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY(),
-                snakeService.getSnakeHeadAndTurnIntoBody().getX() - 1, CellType.SNAKE_HEAD_LEFT);
+        int newX = snakeService.getSnakeHeadAndTurnIntoBody().getX() - 1;
+
+        if (newX < CELL_MIN_ID) {
+            newX = CELL_MAX_ID;
+        }
+
+        snakeService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY(), newX, CellType.SNAKE_HEAD_LEFT);
 
     }
 }

@@ -15,15 +15,17 @@ import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
 public class BorderService {
     private AppCompatActivity activity;
     private CageService cageService;
+    private LevelService levelService;
 
     // cache
     private Paint borderPaint;
     private Rect border;
     //
 
-    public BorderService(AppCompatActivity activity, CageService cageService) {
+    public BorderService(AppCompatActivity activity, CageService cageService, LevelService levelService) {
         this.activity = activity;
         this.cageService = cageService;
+        this.levelService = levelService;
     }
 
     public void drawBorder(Canvas canvas) {
@@ -38,6 +40,8 @@ public class BorderService {
             border = new Rect(startRect.left, startRect.top, endRect.right, endRect.bottom);
         }
 
-        canvas.drawRect(border, borderPaint);
+        if (!levelService.getCurrentLevel().isTransparentWall()) {
+            canvas.drawRect(border, borderPaint);
+        }
     }
 }

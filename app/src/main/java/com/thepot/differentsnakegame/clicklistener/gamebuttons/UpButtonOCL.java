@@ -5,6 +5,9 @@ import android.view.View;
 import com.thepot.differentsnakegame.model.CellType;
 import com.thepot.differentsnakegame.service.SnakeService;
 
+import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
+import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
+
 public class UpButtonOCL implements View.OnClickListener {
 
     private SnakeService snakeService;
@@ -15,8 +18,13 @@ public class UpButtonOCL implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        snakeService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY() - 1,
-                snakeService.getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
+        int newY = snakeService.getSnakeHeadAndTurnIntoBody().getY() - 1;
+
+        if (newY < CELL_MIN_ID) {
+            newY = CELL_MAX_ID;
+        }
+
+        snakeService.makeNewHead(newY, snakeService.getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
 
     }
 }

@@ -3,6 +3,7 @@ package com.thepot.differentsnakegame.model;
 public class CurrentLevel {
     private double currentLevel;
     private int movesLeft;
+    private boolean transparentWall;
 
     public CurrentLevel() {
     }
@@ -21,5 +22,13 @@ public class CurrentLevel {
 
     public void setMovesLeft(int movesLeft) {
         this.movesLeft = movesLeft;
+    }
+
+    public boolean isTransparentWall() {
+        return transparentWall;
+    }
+
+    public void setTransparentWall(boolean transparentWall) {
+        this.transparentWall = transparentWall;
     }
 }

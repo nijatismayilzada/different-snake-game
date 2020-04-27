@@ -14,6 +14,7 @@ import com.thepot.differentsnakegame.clicklistener.gamebuttons.UpButtonOCL;
 import com.thepot.differentsnakegame.model.Cell;
 
 import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
+import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
 
 public class ButtonService {
     private ImageButton upButton;
@@ -52,16 +53,42 @@ public class ButtonService {
 
         Cell snakeHead = snakeService.getSnakeHead();
 
-        if (snakeHead.getY() - 1 < 0 || cageService.getCage().cells[snakeHead.getY() - 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
+        int yUp = snakeHead.getY() - 1;
+        if (yUp < CELL_MIN_ID && levelService.getCurrentLevel().isTransparentWall()) {
+            yUp = CELL_MAX_ID;
+        }
+
+        if (yUp < CELL_MIN_ID || cageService.getCage().cells[yUp][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             upButton.setClickable(false);
         }
-        if (snakeHead.getY() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY() + 1][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
+
+
+        int yBottom = snakeHead.getY() + 1;
+        if (yBottom > CELL_MAX_ID && levelService.getCurrentLevel().isTransparentWall()) {
+            yBottom = CELL_MIN_ID;
+        }
+
+        if (yBottom > CELL_MAX_ID || cageService.getCage().cells[yBottom][snakeHead.getX()].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             downButton.setClickable(false);
         }
-        if (snakeHead.getX() - 1 < 0 || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() - 1].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
+
+
+        int xLeft = snakeHead.getX() - 1;
+        if (xLeft < CELL_MIN_ID && levelService.getCurrentLevel().isTransparentWall()) {
+            xLeft = CELL_MAX_ID;
+        }
+
+        if (xLeft < CELL_MIN_ID || cageService.getCage().cells[snakeHead.getY()][xLeft].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             leftButton.setClickable(false);
         }
-        if (snakeHead.getX() + 1 > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY()][snakeHead.getX() + 1].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
+
+
+        int xRight = snakeHead.getX() + 1;
+        if (xRight > CELL_MAX_ID && levelService.getCurrentLevel().isTransparentWall()) {
+            xRight = CELL_MIN_ID;
+        }
+
+        if (xRight > CELL_MAX_ID || cageService.getCage().cells[snakeHead.getY()][xRight].getCellType().isNotActionable() || levelService.getCurrentLevel().getMovesLeft() == 0) {
             rightButton.setClickable(false);
         }
 

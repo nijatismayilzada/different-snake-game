@@ -14,6 +14,7 @@ import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.TABLE_CELL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_CURRENT_LEVEL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_MOVES_LEFT;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_TRANSPARENT_WALL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.TABLE_LEVEL;
 
 public class DatabaseDetails extends SQLiteOpenHelper {
@@ -26,7 +27,8 @@ public class DatabaseDetails extends SQLiteOpenHelper {
 
     private static final String CREATE_LEVEL_TABLE = "CREATE TABLE " + TABLE_LEVEL + " (" +
             COLUMN_CURRENT_LEVEL + " REAL, " +
-            COLUMN_MOVES_LEFT + " INTEGER)";
+            COLUMN_MOVES_LEFT + " INTEGER, " +
+            COLUMN_TRANSPARENT_WALL + " INTEGER)";
 
 
     private static final int DATABASE_VERSION = 1;
@@ -59,5 +61,6 @@ public class DatabaseDetails extends SQLiteOpenHelper {
         static final String TABLE_LEVEL = "level";
         static final String COLUMN_CURRENT_LEVEL = "current_level";
         static final String COLUMN_MOVES_LEFT = "moves_left";
+        static final String COLUMN_TRANSPARENT_WALL = "transparent_wall";
     }
 }

@@ -58,7 +58,7 @@ public class Board {
         LevelRepository levelRepository = new LevelRepository(databaseDetails);
         levelService = new LevelService(appCompatActivity, cageService, levelRepository);
         snakeService = new SnakeService(appCompatActivity, cageService, levelService, this);
-        borderService = new BorderService(appCompatActivity, cageService);
+        borderService = new BorderService(appCompatActivity, cageService, levelService);
         buttonService = new ButtonService(activity, cageService, snakeService, levelService);
     }
 

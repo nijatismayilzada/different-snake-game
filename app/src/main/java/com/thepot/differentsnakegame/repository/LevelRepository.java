@@ -8,6 +8,7 @@ import com.thepot.differentsnakegame.model.CurrentLevel;
 
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_CURRENT_LEVEL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_MOVES_LEFT;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_TRANSPARENT_WALL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.TABLE_LEVEL;
 
 public class LevelRepository {
@@ -23,6 +24,7 @@ public class LevelRepository {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_CURRENT_LEVEL, currentLevel.getCurrentLevel());
         contentValues.put(COLUMN_MOVES_LEFT, currentLevel.getMovesLeft());
+        contentValues.put(COLUMN_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
         db.insert(TABLE_LEVEL, null, contentValues);
     }
 
@@ -34,6 +36,7 @@ public class LevelRepository {
             CurrentLevel currentLevel = new CurrentLevel();
             currentLevel.setCurrentLevel(cursor.getDouble(cursor.getColumnIndex(COLUMN_CURRENT_LEVEL)));
             currentLevel.setMovesLeft(cursor.getInt(cursor.getColumnIndex(COLUMN_MOVES_LEFT)));
+            currentLevel.setTransparentWall(cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSPARENT_WALL)) == 1);
 
             cursor.close();
             return currentLevel;
@@ -46,6 +49,7 @@ public class LevelRepository {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_CURRENT_LEVEL, currentLevel.getCurrentLevel());
         contentValues.put(COLUMN_MOVES_LEFT, currentLevel.getMovesLeft());
+        contentValues.put(COLUMN_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
 
         int count = db.update(
                 TABLE_LEVEL,

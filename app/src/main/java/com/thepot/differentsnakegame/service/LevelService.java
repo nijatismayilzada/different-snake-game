@@ -50,6 +50,11 @@ public class LevelService {
         }
     }
 
+    public void makeWallTransparent(boolean transparentWall) {
+        getCurrentLevel().setTransparentWall(transparentWall);
+        levelRepository.updateCurrentLevel(getCurrentLevel());
+    }
+
     public void updateMoveCount(int moveCount) {
         getCurrentLevel().setMovesLeft(moveCount);
         levelRepository.updateCurrentLevel(getCurrentLevel());

@@ -13,7 +13,8 @@ public class Level9_2 implements Level {
 
     @Override
     public void loadLevel() {
-        levelService.updateMoveCount(5);
+        levelService.makeWallTransparent(true);
+        levelService.updateMoveCount(500);
         levelService.addLevelCell(13, 14, FOOD_MOVE_TO_NEXT_LEVEL);
 
     }
