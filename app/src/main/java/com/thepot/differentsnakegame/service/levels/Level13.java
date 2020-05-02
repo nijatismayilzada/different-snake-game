@@ -87,6 +87,6 @@ public class Level13 implements Level {
 
     @Override
     public double nextLevelNumber() {
-        return 100;
+        return 14;
     }
 }
