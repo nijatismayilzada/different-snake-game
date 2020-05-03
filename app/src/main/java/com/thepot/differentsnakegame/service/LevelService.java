@@ -60,8 +60,8 @@ public class LevelService {
         levelRepository.updateCurrentLevel(getCurrentLevel());
     }
 
-    public void addLevelCell(int y, int x, CellType foodMoveToNextLevel) {
-        cageService.updateCellType(cageService.getCage().cells[y][x], foodMoveToNextLevel);
+    public void addLevelCell(int y, int x, CellType cellType) {
+        cageService.updateCellType(cageService.getCage().cells[y][x], cellType);
         challenge.getLevelCells().add(cageService.getCage().cells[y][x]);
     }
 

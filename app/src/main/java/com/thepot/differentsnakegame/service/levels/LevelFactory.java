@@ -30,6 +30,11 @@ public class LevelFactory {
         levels.add(new Level12(levelService));
         levels.add(new Level13(levelService));
         levels.add(new Level14(levelService));
+        levels.add(new Level15(levelService));
+        levels.add(new Level16(levelService));
+        levels.add(new Level17(levelService));
+        levels.add(new Level18_1(levelService));
+        levels.add(new Level18_2(levelService));
         levels.add(new LevelRandom(levelService));
 
         levelsMap = new HashMap<>();

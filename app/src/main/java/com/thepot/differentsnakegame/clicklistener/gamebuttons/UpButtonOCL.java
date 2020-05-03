@@ -18,13 +18,19 @@ public class UpButtonOCL implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int newY = snakeService.getSnakeHeadAndTurnIntoBody().getY() - 1;
+        int newY = checkY(snakeService.getSnakeHeadAndTurnIntoBody().getY() - 1);
+        int YAhead = checkY(newY - 1);
 
-        if (newY < CELL_MIN_ID) {
-            newY = CELL_MAX_ID;
+        int X = snakeService.getSnakeHeadAndTurnIntoBody().getX();
+
+        snakeService.makeNewHead(newY, X, YAhead, X, CellType.SNAKE_HEAD_UP);
+
+    }
+
+    private int checkY(int Y) {
+        if (Y < CELL_MIN_ID) {
+            return CELL_MAX_ID;
         }
-
-        snakeService.makeNewHead(newY, snakeService.getSnakeHeadAndTurnIntoBody().getX(), CellType.SNAKE_HEAD_UP);
-
+        return Y;
     }
 }

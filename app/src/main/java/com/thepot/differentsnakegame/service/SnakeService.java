@@ -12,6 +12,7 @@ import com.thepot.differentsnakegame.model.Snake;
 
 import java.util.Collections;
 
+import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.service.CageService.CELL_COUNT;
 
 public class SnakeService {
@@ -78,7 +79,8 @@ public class SnakeService {
 
     }
 
-    public void makeNewHead(int Y, int X, CellType cellType) {
+    public void makeNewHead(int Y, int X, int YAhead, int XAhead, CellType cellType) {
+
         levelService.updateMoveCount(levelService.getCurrentLevel().getMovesLeft() - 1);
         Cell newHead = cageService.getCage().cells[Y][X];
 
@@ -92,13 +94,16 @@ public class SnakeService {
                 }
                 break;
             case POISON:
-                while (getSnake().snakeBody.size() != 2) {
-                    cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
-                    getSnake().snakeBody.remove(0);
+                while (getSnake().snakeBody.size() != 1) {
+                    defaultMove();
                 }
+                break;
+            case OBSTACLE:
+                levelService.addLevelCell(YAhead, XAhead, OBSTACLE);
+                defaultMove();
+                break;
             default:
-                cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
-                getSnake().snakeBody.remove(0);
+                defaultMove();
                 break;
         }
 
@@ -108,5 +113,10 @@ public class SnakeService {
             cageService.updateCellIndex(getSnake().snakeBody.get(i), i);
         }
         board.clearAndDraw();
+    }
+
+    private void defaultMove() {
+        cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
+        getSnake().snakeBody.remove(0);
     }
 }

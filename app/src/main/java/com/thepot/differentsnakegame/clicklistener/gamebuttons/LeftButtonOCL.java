@@ -17,13 +17,19 @@ public class LeftButtonOCL implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int newX = snakeService.getSnakeHeadAndTurnIntoBody().getX() - 1;
+        int newX = checkX(snakeService.getSnakeHeadAndTurnIntoBody().getX() - 1);
+        int XAhead = checkX(newX - 1);
 
-        if (newX < CELL_MIN_ID) {
-            newX = CELL_MAX_ID;
+        int Y = snakeService.getSnakeHeadAndTurnIntoBody().getY();
+
+        snakeService.makeNewHead(Y, newX, Y, XAhead, CellType.SNAKE_HEAD_LEFT);
+
+    }
+
+    private int checkX(int X) {
+        if (X < CELL_MIN_ID) {
+            return CELL_MAX_ID;
         }
-
-        snakeService.makeNewHead(snakeService.getSnakeHeadAndTurnIntoBody().getY(), newX, CellType.SNAKE_HEAD_LEFT);
-
+        return X;
     }
 }
