@@ -102,7 +102,7 @@ public class Level18_2 implements Level {
 
         levelService.addLevelCell(4, 0, OBSTACLE);
         levelService.addLevelCell(4, 3, OBSTACLE);
-        levelService.addLevelCell(4, 4, OBSTACLE);
+        levelService.addLevelCell(5, 3, OBSTACLE);
         levelService.addLevelCell(7, 2, OBSTACLE);
         levelService.addLevelCell(4, 11, OBSTACLE);
         levelService.addLevelCell(5, 11, OBSTACLE);

@@ -25,6 +25,6 @@ public class Level1 implements Level {
 
     @Override
     public double nextLevelNumber() {
-        return 16;
+        return 2;
     }
 }

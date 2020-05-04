@@ -103,7 +103,7 @@ public class Level18_1 implements Level {
 
         levelService.addLevelCell(4, 0, OBSTACLE);
         levelService.addLevelCell(4, 3, OBSTACLE);
-        levelService.addLevelCell(4, 4, OBSTACLE);
+        levelService.addLevelCell(5, 3, OBSTACLE);
         levelService.addLevelCell(7, 2, OBSTACLE);
         levelService.addLevelCell(4, 11, OBSTACLE);
         levelService.addLevelCell(5, 11, OBSTACLE);
@@ -115,6 +115,11 @@ public class Level18_1 implements Level {
 
 
         levelService.addLevelCell(12, 12, FOOD_MOVE_TO_NEXT_LEVEL);
+        levelService.addLevelCell(14, 10, FOOD);
+        levelService.addLevelCell(14, 11, FOOD);
+        levelService.addLevelCell(14, 12, FOOD);
+        levelService.addLevelCell(14, 13, FOOD);
+
 
 
         levelService.addLevelCell(6, 0, FOOD);

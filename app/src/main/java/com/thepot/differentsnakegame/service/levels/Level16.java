@@ -18,11 +18,6 @@ public class Level16 implements Level {
         levelService.makeWallTransparent(true);
         levelService.updateMoveCount(999);
 
-        //temporary
-        levelService.addLevelCell(7, 8, FOOD);
-        levelService.addLevelCell(7, 9, FOOD);
-        //
-
 
         levelService.addLevelCell(1, 2, OBSTACLE);
         levelService.addLevelCell(1, 3, OBSTACLE);

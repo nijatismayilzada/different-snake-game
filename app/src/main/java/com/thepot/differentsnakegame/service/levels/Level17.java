@@ -2,6 +2,7 @@ package com.thepot.differentsnakegame.service.levels;
 
 import com.thepot.differentsnakegame.service.LevelService;
 
+import static com.thepot.differentsnakegame.model.CellType.FLARE;
 import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
@@ -40,12 +41,12 @@ public class Level17 implements Level {
         levelService.addLevelCell(3, 8, WALL);
 
 
+        levelService.addLevelCell(4, 7, OBSTACLE);
         levelService.addLevelCell(5, 6, OBSTACLE);
         levelService.addLevelCell(6, 5, OBSTACLE);
         levelService.addLevelCell(7, 4, OBSTACLE);
         levelService.addLevelCell(8, 5, OBSTACLE);
         levelService.addLevelCell(9, 6, OBSTACLE);
-        levelService.addLevelCell(10, 7, OBSTACLE);
         levelService.addLevelCell(9, 8, OBSTACLE);
         levelService.addLevelCell(8, 9, OBSTACLE);
         levelService.addLevelCell(7, 10, OBSTACLE);
@@ -65,7 +66,7 @@ public class Level17 implements Level {
         levelService.addLevelCell(8, 8, FOOD);
         levelService.addLevelCell(7, 9, FOOD);
         levelService.addLevelCell(6, 8, FOOD);
-        levelService.addLevelCell(7, 7, FOOD);
+        levelService.addLevelCell(7, 7, FLARE);
 
     }
 
@@ -76,6 +77,6 @@ public class Level17 implements Level {
 
     @Override
     public double nextLevelNumber() {
-        return 18;
+        return 18.1;
     }
 }

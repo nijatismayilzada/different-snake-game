@@ -12,7 +12,15 @@ import com.thepot.differentsnakegame.model.Snake;
 
 import java.util.Collections;
 
+import static com.thepot.differentsnakegame.model.CellType.EMPTY;
+import static com.thepot.differentsnakegame.model.CellType.FLARE;
+import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
+import static com.thepot.differentsnakegame.model.CellType.SNAKE_BODY;
+import static com.thepot.differentsnakegame.model.CellType.SNAKE_HEAD_DOWN;
+import static com.thepot.differentsnakegame.model.CellType.SNAKE_HEAD_LEFT;
+import static com.thepot.differentsnakegame.model.CellType.SNAKE_HEAD_RIGHT;
+import static com.thepot.differentsnakegame.model.CellType.SNAKE_HEAD_UP;
 import static com.thepot.differentsnakegame.service.CageService.CELL_COUNT;
 
 public class SnakeService {
@@ -35,21 +43,21 @@ public class SnakeService {
 
         if (snake == null) {
             snake = new Snake();
-            snake.snakeBody.addAll(cageService.findCellsOfTypes(CellType.SNAKE_BODY,
-                    CellType.SNAKE_HEAD_DOWN, CellType.SNAKE_HEAD_LEFT, CellType.SNAKE_HEAD_RIGHT,
-                    CellType.SNAKE_HEAD_UP));
+            snake.snakeBody.addAll(cageService.findCellsOfTypes(SNAKE_BODY,
+                    SNAKE_HEAD_DOWN, SNAKE_HEAD_LEFT, SNAKE_HEAD_RIGHT,
+                    SNAKE_HEAD_UP));
             Collections.sort(snake.snakeBody);
             if (snake.snakeBody.isEmpty()) {
                 Cell cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 5];
-                cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_BODY, 0);
+                cageService.updateCellTypeAndIndex(cell, SNAKE_BODY, 0);
                 snake.snakeBody.add(cell);
 
                 cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 4];
-                cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_BODY, 1);
+                cageService.updateCellTypeAndIndex(cell, SNAKE_BODY, 1);
                 snake.snakeBody.add(cell);
 
                 cell = cageService.getCage().cells[CELL_COUNT / 2][CELL_COUNT / 2 - 3];
-                cageService.updateCellTypeAndIndex(cell, CellType.SNAKE_HEAD_RIGHT, 2);
+                cageService.updateCellTypeAndIndex(cell, SNAKE_HEAD_RIGHT, 2);
                 snake.snakeBody.add(cell);
             }
         }
@@ -74,7 +82,7 @@ public class SnakeService {
 
     public Cell getSnakeHeadAndTurnIntoBody() {
         Cell snakeHead = getSnakeHead();
-        cageService.updateCellType(snakeHead, CellType.SNAKE_BODY);
+        cageService.updateCellType(snakeHead, SNAKE_BODY);
         return snakeHead;
 
     }
@@ -88,8 +96,14 @@ public class SnakeService {
             case FOOD_MOVE_TO_NEXT_LEVEL:
                 levelService.loadNextLevel();
                 break;
+            case FLARE:
+                while (getSnake().snakeBody.size() != 6) {
+                    defaultMove();
+                }
+                levelService.loadNextLevel();
+                break;
             case FOOD:
-                if (cageService.findCellsOfTypes(CellType.FOOD).size() == 1) {
+                if (cageService.findCellsOfTypes(FOOD, FLARE).size() == 1) {
                     levelService.loadNextLevel();
                 }
                 break;
@@ -116,7 +130,7 @@ public class SnakeService {
     }
 
     private void defaultMove() {
-        cageService.updateCellType(getSnake().snakeBody.get(0), CellType.EMPTY);
+        cageService.updateCellType(getSnake().snakeBody.get(0), EMPTY);
         getSnake().snakeBody.remove(0);
     }
 }

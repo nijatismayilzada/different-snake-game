@@ -13,6 +13,7 @@ public enum CellType {
     SNAKE_HEAD_RIGHT(R.drawable.ic_backspace_24px_right, false, false),
     SNAKE_BODY(R.drawable.ic_add_box_24px, false, false),
     FOOD(R.drawable.ic_add_circle_24px, true, true),
+    FLARE(R.drawable.ic_flare_white_24dp, true, true),
     POISON(R.drawable.ic_remove_circle_24px, true, true),
     FOOD_MOVE_TO_NEXT_LEVEL(R.drawable.ic_add_circle_24px, true, true),
     WALL(R.drawable.ic_border_all_white_24dp, false, true),
