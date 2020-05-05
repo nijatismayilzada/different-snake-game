@@ -4,7 +4,7 @@
     android:id="@+id/activity_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/colorBackgroundBlack"
     android:orientation="vertical"
     tools:context=".GameActivity">
 
@@ -35,10 +35,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/marginMini"
             android:layout_marginTop="@dimen/marginMini"
+            android:layout_marginBottom="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p"
             android:text="@string/game_over"
-            android:textColor="@color/colorBoardLine"
-            android:textSize="@dimen/bigText" />
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
 
     </RelativeLayout>
 
@@ -58,8 +59,8 @@
             android:layout_marginTop="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p"
             android:text="@string/level"
-            android:textColor="@color/colorBoardLine"
-            android:textSize="@dimen/bigText" />
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
 
         <TextView
             android:id="@+id/levelHolder"
@@ -68,8 +69,8 @@
             android:layout_marginTop="@dimen/marginMini"
             android:layout_toEndOf="@id/level"
             android:fontFamily="@font/press_start_2p"
-            android:textColor="@color/colorBoardLine"
-            android:textSize="@dimen/bigText" />
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
 
         <TextView
             android:id="@+id/moves"
@@ -81,8 +82,8 @@
             android:layout_marginEnd="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p"
             android:text="@string/moves"
-            android:textColor="@color/colorBoardLine"
-            android:textSize="@dimen/bigText" />
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
 
         <TextView
             android:id="@+id/movesHolder"
@@ -91,8 +92,8 @@
             android:layout_marginTop="@dimen/marginMini"
             android:layout_toStartOf="@id/moves"
             android:fontFamily="@font/press_start_2p"
-            android:textColor="@color/colorBoardLine"
-            android:textSize="@dimen/bigText" />
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
 
         <!--        <ImageButton-->
         <!--            android:id="@+id/replay"-->
@@ -111,8 +112,8 @@
             android:layout_height="@dimen/buttonSmall"
             android:layout_below="@id/upButton"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/buttonMargin20"
-            android:layout_marginEnd="@dimen/buttonMargin10"
+            android:layout_marginTop="@dimen/buttonMarginBig"
+            android:layout_marginEnd="@dimen/buttonMarginSmall"
             android:background="@drawable/ic_menu_open_white_24dp" />
 
         <ImageButton
@@ -131,6 +132,7 @@
             android:layout_below="@id/upButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/buttonMargin"
+            android:layout_marginBottom="@dimen/marginMini"
             android:background="@drawable/ic_arrow_drop_down_circle_24px" />
 
         <ImageButton

@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/buttonMargin10"
+        android:layout_marginTop="@dimen/buttonMarginSmall"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/new_game"
-        android:textColor="@color/colorBoardLine"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/continue_game"
-        android:textColor="@color/colorBoardLine"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 
     <TextView
@@ -40,10 +40,10 @@
         android:layout_below="@+id/newGame"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/buttonMargin10"
+        android:layout_marginTop="@dimen/buttonMarginSmall"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/about"
-        android:textColor="@color/colorBoardLine"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 
     <TextView
@@ -53,10 +53,10 @@
         android:layout_below="@+id/about"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/buttonMargin10"
+        android:layout_marginTop="@dimen/buttonMarginSmall"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/exit"
-        android:textColor="@color/colorBoardLine"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 
 

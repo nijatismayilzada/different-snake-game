@@ -9,6 +9,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.thepot.differentsnakegame.R;
 
+import static android.graphics.Paint.Style.FILL;
+import static android.graphics.Paint.Style.STROKE;
 import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
 import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
 
@@ -20,6 +22,7 @@ public class BorderService {
     // cache
     private Paint borderPaint;
     private Rect border;
+    private Paint backgroundPaint;
     //
 
     public BorderService(AppCompatActivity activity, CageService cageService, LevelService levelService) {
@@ -29,9 +32,13 @@ public class BorderService {
     }
 
     public void drawBorder(Canvas canvas) {
-        if (borderPaint == null || border == null) {
+        if (backgroundPaint == null || borderPaint == null || border == null) {
+            backgroundPaint = new Paint();
+            backgroundPaint.setStyle(FILL);
+            backgroundPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null));
+
             borderPaint = new Paint();
-            borderPaint.setStyle(Paint.Style.STROKE);
+            borderPaint.setStyle(STROKE);
             borderPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBoardLine, null));
             borderPaint.setStrokeWidth(cageService.getCellSize() / 10);
 
@@ -39,6 +46,8 @@ public class BorderService {
             Rect endRect = cageService.getCage().cells[CELL_MAX_ID][CELL_MAX_ID].getRect();
             border = new Rect(startRect.left, startRect.top, endRect.right, endRect.bottom);
         }
+
+        canvas.drawRect(border, backgroundPaint);
 
         if (!levelService.getCurrentLevel().isTransparentWall()) {
             canvas.drawRect(border, borderPaint);

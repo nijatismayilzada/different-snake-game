@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button">60dp</dimen>
+    <dimen name="button">80dp</dimen>
     <dimen name="buttonSmall">46dp</dimen>
-    <dimen name="buttonMargin">22dp</dimen>
-    <dimen name="buttonMargin20">20dp</dimen>
-    <dimen name="buttonMargin10">10dp</dimen>
+    <dimen name="buttonMargin">30dp</dimen>
+    <dimen name="buttonMarginBig">60dp</dimen>
+    <dimen name="buttonMarginSmall">10dp</dimen>
     <dimen name="marginMini">8dp</dimen>
-    <dimen name="bigText">15sp</dimen>
-    <dimen name="mainMenuText">30sp</dimen>
+    <dimen name="smallText">16sp</dimen>
+    <dimen name="mainMenuText">32sp</dimen>
 </resources>

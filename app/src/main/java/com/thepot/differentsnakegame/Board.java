@@ -40,7 +40,7 @@ public class Board {
         this.boardHolder = boardHolder;
         this.boardHolder.setImageBitmap(mBitmap);
 
-        mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackground, null);
+        mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackgroundBlack, null);
 
         activity.<ImageButton>findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
 
@@ -65,9 +65,9 @@ public class Board {
     public void clearAndDraw() {
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawColor(mColorBackground);
+        borderService.drawBorder(canvas);
         snakeService.drawSnake(canvas);
         levelService.drawLevel(canvas);
-        borderService.drawBorder(canvas);
         buttonService.updateButtons();
 
         movesHolderText.setText(String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
