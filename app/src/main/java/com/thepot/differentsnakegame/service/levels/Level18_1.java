@@ -19,7 +19,7 @@ public class Level18_1 implements Level {
     @Override
     public void loadLevel() {
         levelService.makeWallTransparent(false);
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
 
         levelService.addLevelCell(2, 7, WALL);
         levelService.addLevelCell(3, 6, WALL);

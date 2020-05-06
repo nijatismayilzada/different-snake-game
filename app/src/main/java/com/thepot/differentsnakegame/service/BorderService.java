@@ -40,7 +40,7 @@ public class BorderService {
             borderPaint = new Paint();
             borderPaint.setStyle(STROKE);
             borderPaint.setColor(ResourcesCompat.getColor(activity.getResources(), R.color.colorBoardLine, null));
-            borderPaint.setStrokeWidth(cageService.getCellSize() / 4);
+            borderPaint.setStrokeWidth(cageService.getCellSize() / 5);
 
             Rect startRect = cageService.getCage().cells[CELL_MIN_ID][CELL_MIN_ID].getRect();
             Rect endRect = cageService.getCage().cells[CELL_MAX_ID][CELL_MAX_ID].getRect();

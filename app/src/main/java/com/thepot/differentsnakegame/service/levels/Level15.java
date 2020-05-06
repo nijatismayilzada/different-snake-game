@@ -16,7 +16,7 @@ public class Level15 implements Level {
     @Override
     public void loadLevel() {
         levelService.makeWallTransparent(true);
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
 
         levelService.addLevelCell(7, 7, FOOD_MOVE_TO_NEXT_LEVEL);
         levelService.addLevelCell(5, 5, WALL);

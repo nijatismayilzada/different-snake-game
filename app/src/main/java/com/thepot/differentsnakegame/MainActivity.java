@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         CellRepository cellRepository = new CellRepository(databaseDetails);
 
         hideNavigationOTL = new HideNavigationOTL(this);
+        hideNavigationOTL.hideSystemUI();
         findViewById(R.id.activity_main).setOnTouchListener(hideNavigationOTL);
 
         findViewById(R.id.newGame).setOnClickListener(new NewGameOCL(this, levelRepository, cellRepository));

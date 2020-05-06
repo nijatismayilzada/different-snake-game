@@ -18,7 +18,7 @@ public class Level14 implements Level {
     public void loadLevel() {
 
         levelService.makeWallTransparent(true);
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
         levelService.addLevelCell(6, 3, FOOD);
         levelService.addLevelCell(8, 12, FOOD);
         levelService.addLevelCell(10, 0, FOOD);

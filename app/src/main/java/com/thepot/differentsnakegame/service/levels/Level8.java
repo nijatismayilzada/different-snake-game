@@ -15,7 +15,7 @@ public class Level8 implements Level {
 
     @Override
     public void loadLevel() {
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
 
         levelService.addLevelCell(5, 7, POISON);
 

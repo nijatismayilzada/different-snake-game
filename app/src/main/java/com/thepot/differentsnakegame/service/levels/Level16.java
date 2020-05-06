@@ -16,7 +16,7 @@ public class Level16 implements Level {
     @Override
     public void loadLevel() {
         levelService.makeWallTransparent(true);
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
 
 
         levelService.addLevelCell(1, 2, OBSTACLE);

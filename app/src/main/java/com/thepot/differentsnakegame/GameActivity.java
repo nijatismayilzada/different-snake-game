@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thepot.differentsnakegame.clicklistener.AdsOICL;
 import com.thepot.differentsnakegame.clicklistener.BoardHolderObserver;
 import com.thepot.differentsnakegame.clicklistener.HideNavigationOTL;
 
@@ -25,6 +26,7 @@ public class GameActivity extends AppCompatActivity {
     private void newGame() {
         hideNavigationOTL = new HideNavigationOTL(this);
         hideNavigationOTL.hideSystemUI();
+        new AdsOICL(this);
         findViewById(R.id.activity_game).setOnTouchListener(hideNavigationOTL);
         ImageView boardHolder = findViewById(R.id.boardHolder);
         boardHolder.getViewTreeObserver().addOnGlobalLayoutListener(new BoardHolderObserver(GameActivity.this, boardHolder));

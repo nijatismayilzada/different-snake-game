@@ -19,6 +19,7 @@ import com.thepot.differentsnakegame.service.CageService;
 import com.thepot.differentsnakegame.service.LevelService;
 import com.thepot.differentsnakegame.service.SnakeService;
 
+import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 public class Board {
@@ -70,7 +71,9 @@ public class Board {
         levelService.drawLevel(canvas);
         buttonService.updateButtons();
 
-        movesHolderText.setText(String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
+        movesHolderText.setText(levelService.getCurrentLevel().getMovesLeft() < 0 ?
+                DecimalFormatSymbols.getInstance().getInfinity() : String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
+
         levelHolderText.setText(doubleToString(levelService.getCurrentLevel().getCurrentLevel()));
 
         boardHolder.invalidate();

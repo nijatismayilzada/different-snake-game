@@ -5,6 +5,7 @@
     <dimen name="buttonMargin">30dp</dimen>
     <dimen name="buttonMarginBig">60dp</dimen>
     <dimen name="buttonMarginSmall">10dp</dimen>
+    <dimen name="bannerHeight">50dp</dimen>
     <dimen name="marginMini">8dp</dimen>
     <dimen name="smallText">16sp</dimen>
     <dimen name="mainMenuText">32sp</dimen>

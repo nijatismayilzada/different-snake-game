@@ -14,7 +14,7 @@ public class Level6 implements Level {
 
     @Override
     public void loadLevel() {
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
         levelService.addLevelCell(2, 3, FOOD);
         levelService.addLevelCell(2, 11, FOOD);
         levelService.addLevelCell(2, 1, WALL);

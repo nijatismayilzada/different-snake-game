@@ -13,7 +13,7 @@ public class Level9_1 implements Level {
 
     @Override
     public void loadLevel() {
-        levelService.updateMoveCount(999);
+        levelService.updateMoveCount(-1);
         levelService.addLevelCell(13, 1, FOOD_MOVE_TO_NEXT_LEVEL);
     }
 
