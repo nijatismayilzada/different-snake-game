@@ -2,6 +2,8 @@ package com.thepot.differentsnakegame.service.levels;
 
 import com.thepot.differentsnakegame.service.LevelService;
 
+import static com.thepot.differentsnakegame.service.LevelService.END_GAME;
+
 public class LevelRandom implements Level {
     private LevelService levelService;
 
@@ -16,11 +18,11 @@ public class LevelRandom implements Level {
 
     @Override
     public double levelNumber() {
-        return 100;
+        return END_GAME;
     }
 
     @Override
     public double nextLevelNumber() {
-        return 100;
+        return END_GAME;
     }
 }

@@ -19,6 +19,8 @@ import java.util.Random;
 import static com.thepot.differentsnakegame.model.CellType.FOOD_MOVE_TO_NEXT_LEVEL;
 
 public class LevelService {
+    public static final double END_GAME = -1;
+
     private AppCompatActivity appCompatActivity;
     private CageService cageService;
     private LevelRepository levelRepository;

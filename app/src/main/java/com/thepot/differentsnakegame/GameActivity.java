@@ -25,7 +25,6 @@ public class GameActivity extends AppCompatActivity {
 
     private void newGame() {
         hideNavigationOTL = new HideNavigationOTL(this);
-        hideNavigationOTL.hideSystemUI();
         new AdsOICL(this);
         findViewById(R.id.activity_game).setOnTouchListener(hideNavigationOTL);
         ImageView boardHolder = findViewById(R.id.boardHolder);

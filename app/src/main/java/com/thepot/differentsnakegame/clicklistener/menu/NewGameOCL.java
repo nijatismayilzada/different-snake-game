@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.GameActivity;
+import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
@@ -19,6 +20,7 @@ public class NewGameOCL implements View.OnClickListener {
         this.activity = activity;
         this.levelRepository = levelRepository;
         this.cellRepository = cellRepository;
+        this.activity.findViewById(R.id.newGame).setOnClickListener(this);
     }
 
     @Override

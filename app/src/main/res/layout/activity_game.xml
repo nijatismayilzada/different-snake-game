@@ -20,7 +20,7 @@
             android:layout_height="@dimen/bannerHeight"
             android:layout_alignParentStart="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
 
     </RelativeLayout>
 
@@ -28,8 +28,8 @@
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ads"
-        android:layout_above="@id/status">
+        android:layout_above="@id/status"
+        android:layout_below="@id/ads">
 
 
         <ImageView
@@ -45,7 +45,7 @@
         android:layout_above="@id/controls">
 
         <TextView
-            android:id="@+id/gameOver"
+            android:id="@+id/gameStateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -53,8 +53,8 @@
             android:layout_marginTop="@dimen/marginMini"
             android:layout_marginBottom="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p"
-            android:text="@string/game_over"
             android:textColor="@color/colorWhite"
+            android:textAlignment="center"
             android:textSize="@dimen/smallText" />
 
     </RelativeLayout>

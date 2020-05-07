@@ -8,16 +8,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <TextView
-        android:id="@+id/newGame"
+        android:id="@+id/saveGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/continueGame"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/buttonMarginSmall"
         android:fontFamily="@font/press_start_2p"
-        android:text="@string/new_game"
+        android:text="@string/save_game_curr"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 
@@ -28,8 +27,21 @@
         android:layout_above="@+id/newGame"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/buttonMarginSmall"
         android:fontFamily="@font/press_start_2p"
         android:text="@string/continue_game"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/mainMenuText" />
+
+    <TextView
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/buttonMarginSmall"
+        android:fontFamily="@font/press_start_2p"
+        android:text="@string/new_game"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/mainMenuText" />
 

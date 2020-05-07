@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.GameActivity;
+import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
 public class ContinueGameOCL implements View.OnClickListener {
@@ -13,10 +14,11 @@ public class ContinueGameOCL implements View.OnClickListener {
     private LevelRepository levelRepository;
     private View continueButton;
 
-    public ContinueGameOCL(AppCompatActivity activity, LevelRepository levelRepository, View continueButton) {
+    public ContinueGameOCL(AppCompatActivity activity, LevelRepository levelRepository) {
         this.activity = activity;
         this.levelRepository = levelRepository;
-        this.continueButton = continueButton;
+        this.continueButton = this.activity.findViewById(R.id.continueGame);
+        this.continueButton.setOnClickListener(this);
         setupButton();
     }
 

@@ -6,6 +6,7 @@ import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.model.CellType.POISON;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
+import static com.thepot.differentsnakegame.service.LevelService.END_GAME;
 
 public class Level18_2 implements Level {
     private LevelService levelService;
@@ -124,6 +125,6 @@ public class Level18_2 implements Level {
 
     @Override
     public double nextLevelNumber() {
-        return 100;
+        return END_GAME;
     }
 }

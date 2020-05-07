@@ -1,6 +1,5 @@
 package com.thepot.differentsnakegame.service;
 
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,13 +17,14 @@ import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
 import static com.thepot.differentsnakegame.service.CageService.CELL_MIN_ID;
+import static com.thepot.differentsnakegame.service.LevelService.END_GAME;
 
 public class ButtonService {
     private ImageButton upButton;
     private ImageButton downButton;
     private ImageButton leftButton;
     private ImageButton rightButton;
-    private TextView gameOver;
+    private TextView gameState;
 
     private CageService cageService;
     private SnakeService snakeService;
@@ -44,7 +44,7 @@ public class ButtonService {
         rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
 
-        gameOver = activity.findViewById(R.id.gameOver);
+        gameState = activity.findViewById(R.id.gameStateText);
     }
 
     public void updateButtons() {
@@ -61,7 +61,7 @@ public class ButtonService {
 
         if (levelService.getCurrentLevel().getMovesLeft() == 0
                 || cantGoUp(yUp)
-                || (isObstacle(yUp, snakeHead.getX()) && cantMoveUp(yUp2))) {
+                || (getCellType(yUp, snakeHead.getX()) == OBSTACLE && cantMoveUp(yUp2))) {
             upButton.setClickable(false);
         }
 
@@ -71,7 +71,7 @@ public class ButtonService {
 
         if (levelService.getCurrentLevel().getMovesLeft() == 0
                 || cantGoDown(yBottom)
-                || (isObstacle(yBottom, snakeHead.getX()) && cantMoveDown(yBottom2))) {
+                || (getCellType(yBottom, snakeHead.getX()) == OBSTACLE && cantMoveDown(yBottom2))) {
             downButton.setClickable(false);
         }
 
@@ -81,24 +81,27 @@ public class ButtonService {
 
         if (levelService.getCurrentLevel().getMovesLeft() == 0
                 || cantGoLeft(xLeft)
-                || (isObstacle(snakeHead.getY(), xLeft) && cantMoveLeft(xLeft2))) {
+                || (getCellType(snakeHead.getY(), xLeft) == OBSTACLE && cantMoveLeft(xLeft2))) {
             leftButton.setClickable(false);
         }
-
 
         int xRight = checkEdge(snakeHead.getX() + 1 > CELL_MAX_ID, snakeHead.getX() + 1, CELL_MIN_ID);
         int xRight2 = checkEdge(xRight + 1 > CELL_MAX_ID, xRight + 1, CELL_MIN_ID);
 
         if (levelService.getCurrentLevel().getMovesLeft() == 0
                 || cantGoRight(xRight)
-                || (isObstacle(snakeHead.getY(), xRight) && cantMoveRight(xRight2))) {
+                || (getCellType(snakeHead.getY(), xRight) == OBSTACLE && cantMoveRight(xRight2))) {
             rightButton.setClickable(false);
         }
 
         if (upButton.isClickable() || downButton.isClickable() || leftButton.isClickable() || rightButton.isClickable()) {
-            gameOver.setVisibility(View.INVISIBLE);
+            gameState.setText("");
         } else {
-            gameOver.setVisibility(View.VISIBLE);
+            gameState.setText(R.string.game_over);
+        }
+
+        if (levelService.getCurrentLevel().getCurrentLevel() == END_GAME) {
+            gameState.setText(R.string.game_end);
         }
     }
 
@@ -139,10 +142,6 @@ public class ButtonService {
 
     private boolean cantMoveRight(int xRight) {
         return xRight > CELL_MAX_ID || getCellType(snakeService.getSnakeHead().getY(), xRight) != EMPTY;
-    }
-
-    private boolean isObstacle(int y, int x) {
-        return getCellType(y, x) == OBSTACLE;
     }
 
     private CellType getCellType(int y, int x) {
