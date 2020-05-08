@@ -7,28 +7,32 @@ import android.provider.BaseColumns;
 
 import androidx.annotation.Nullable;
 
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_INDEX_IN_GROUP;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_TYPE;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_X;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_Y;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_INDEX_IN_GROUP;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_SAVE_ID;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_TYPE;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_X;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_Y;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.TABLE_CELL;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_CURRENT_LEVEL;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_MOVES_LEFT;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_TRANSPARENT_WALL;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_CURRENT_LEVEL;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_MOVES_LEFT;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_SAVE_ID;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_TRANSPARENT_WALL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.TABLE_LEVEL;
 
 public class DatabaseDetails extends SQLiteOpenHelper {
 
     private static final String CREATE_CELL_TABLE = "CREATE TABLE " + TABLE_CELL + " (" +
-            COLUMN_CELL_X + " INTEGER, " +
-            COLUMN_CELL_Y + " INTEGER, " +
-            COLUMN_CELL_TYPE + " TEXT, " +
-            COLUMN_CELL_INDEX_IN_GROUP + " INTEGER)";
+            CELL_X + " INTEGER, " +
+            CELL_Y + " INTEGER, " +
+            CELL_TYPE + " TEXT, " +
+            CELL_INDEX_IN_GROUP + " INTEGER, " +
+            CELL_SAVE_ID + " INTEGER)";
 
     private static final String CREATE_LEVEL_TABLE = "CREATE TABLE " + TABLE_LEVEL + " (" +
-            COLUMN_CURRENT_LEVEL + " REAL, " +
-            COLUMN_MOVES_LEFT + " INTEGER, " +
-            COLUMN_TRANSPARENT_WALL + " INTEGER)";
+            LEVEL_CURRENT_LEVEL + " REAL, " +
+            LEVEL_MOVES_LEFT + " INTEGER, " +
+            LEVEL_TRANSPARENT_WALL + " INTEGER, " +
+            LEVEL_SAVE_ID + " INTEGER)";
 
 
     private static final int DATABASE_VERSION = 1;
@@ -51,16 +55,18 @@ public class DatabaseDetails extends SQLiteOpenHelper {
 
     static class CellTable implements BaseColumns {
         static final String TABLE_CELL = "cell";
-        static final String COLUMN_CELL_X = "cell_x";
-        static final String COLUMN_CELL_Y = "cell_y";
-        static final String COLUMN_CELL_TYPE = "type";
-        static final String COLUMN_CELL_INDEX_IN_GROUP = "index_in_group";
+        static final String CELL_X = "x";
+        static final String CELL_Y = "y";
+        static final String CELL_TYPE = "type";
+        static final String CELL_INDEX_IN_GROUP = "index_in_group";
+        static final String CELL_SAVE_ID = "save_id";
     }
 
     static class LevelTable implements BaseColumns {
         static final String TABLE_LEVEL = "level";
-        static final String COLUMN_CURRENT_LEVEL = "current_level";
-        static final String COLUMN_MOVES_LEFT = "moves_left";
-        static final String COLUMN_TRANSPARENT_WALL = "transparent_wall";
+        static final String LEVEL_CURRENT_LEVEL = "current_level";
+        static final String LEVEL_MOVES_LEFT = "moves_left";
+        static final String LEVEL_TRANSPARENT_WALL = "transparent_wall";
+        static final String LEVEL_SAVE_ID = "save_id";
     }
 }

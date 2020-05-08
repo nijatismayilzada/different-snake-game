@@ -7,6 +7,7 @@ public class Cell implements Comparable<Cell> {
     private int y;
     private CellType cellType;
     private int indexInGroup;
+    private int saveId;
     private Rect rect;
 
     public Cell() {
@@ -50,6 +51,14 @@ public class Cell implements Comparable<Cell> {
 
     public void setRect(Rect rect) {
         this.rect = rect;
+    }
+
+    public int getSaveId() {
+        return saveId;
+    }
+
+    public void setSaveId(int saveId) {
+        this.saveId = saveId;
     }
 
     @Override

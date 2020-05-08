@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.thepot.differentsnakegame.model.CurrentLevel;
 
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_CURRENT_LEVEL;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_MOVES_LEFT;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.COLUMN_TRANSPARENT_WALL;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_CURRENT_LEVEL;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_MOVES_LEFT;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.LEVEL_TRANSPARENT_WALL;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.LevelTable.TABLE_LEVEL;
 
 public class LevelRepository {
@@ -22,9 +22,9 @@ public class LevelRepository {
 
     public void insertCurrentLevel(CurrentLevel currentLevel) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CURRENT_LEVEL, currentLevel.getCurrentLevel());
-        contentValues.put(COLUMN_MOVES_LEFT, currentLevel.getMovesLeft());
-        contentValues.put(COLUMN_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
+        contentValues.put(LEVEL_CURRENT_LEVEL, currentLevel.getCurrentLevel());
+        contentValues.put(LEVEL_MOVES_LEFT, currentLevel.getMovesLeft());
+        contentValues.put(LEVEL_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
         db.insert(TABLE_LEVEL, null, contentValues);
     }
 
@@ -34,9 +34,9 @@ public class LevelRepository {
         if (cursor.moveToNext()) {
 
             CurrentLevel currentLevel = new CurrentLevel();
-            currentLevel.setCurrentLevel(cursor.getDouble(cursor.getColumnIndex(COLUMN_CURRENT_LEVEL)));
-            currentLevel.setMovesLeft(cursor.getInt(cursor.getColumnIndex(COLUMN_MOVES_LEFT)));
-            currentLevel.setTransparentWall(cursor.getInt(cursor.getColumnIndex(COLUMN_TRANSPARENT_WALL)) == 1);
+            currentLevel.setCurrentLevel(cursor.getDouble(cursor.getColumnIndex(LEVEL_CURRENT_LEVEL)));
+            currentLevel.setMovesLeft(cursor.getInt(cursor.getColumnIndex(LEVEL_MOVES_LEFT)));
+            currentLevel.setTransparentWall(cursor.getInt(cursor.getColumnIndex(LEVEL_TRANSPARENT_WALL)) == 1);
 
             cursor.close();
             return currentLevel;
@@ -47,9 +47,9 @@ public class LevelRepository {
     public void updateCurrentLevel(CurrentLevel currentLevel) {
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_CURRENT_LEVEL, currentLevel.getCurrentLevel());
-        contentValues.put(COLUMN_MOVES_LEFT, currentLevel.getMovesLeft());
-        contentValues.put(COLUMN_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
+        contentValues.put(LEVEL_CURRENT_LEVEL, currentLevel.getCurrentLevel());
+        contentValues.put(LEVEL_MOVES_LEFT, currentLevel.getMovesLeft());
+        contentValues.put(LEVEL_TRANSPARENT_WALL, currentLevel.isTransparentWall() ? 1 : 0);
 
         int count = db.update(
                 TABLE_LEVEL,

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.thepot.differentsnakegame.model.CellType.EMPTY;
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_0;
 
 public class CageService {
     public static final int CELL_COUNT = 15;
@@ -76,7 +77,7 @@ public class CageService {
 
         if (cage == null) {
             if (cellRepository.cageExists()) {
-                cage = cellRepository.getPlainCage();
+                cage = cellRepository.getPlainCage(SAVE_ID_0);
             } else {
                 cage = new Cage();
                 cage.setCells(generateCells());
@@ -104,6 +105,7 @@ public class CageService {
         cell.setY(y);
         cell.setCellType(EMPTY);
         cell.setIndexInGroup(CELL_NO_POSITION);
+        cell.setSaveId(SAVE_ID_0);
         return cell;
     }
 

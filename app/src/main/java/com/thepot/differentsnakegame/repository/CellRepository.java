@@ -8,14 +8,18 @@ import com.thepot.differentsnakegame.model.Cage;
 import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.CellType;
 
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_INDEX_IN_GROUP;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_TYPE;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_X;
-import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.COLUMN_CELL_Y;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_INDEX_IN_GROUP;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_SAVE_ID;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_TYPE;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_X;
+import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.CELL_Y;
 import static com.thepot.differentsnakegame.repository.DatabaseDetails.CellTable.TABLE_CELL;
 import static com.thepot.differentsnakegame.service.CageService.CELL_COUNT;
 
 public class CellRepository {
+
+    public static final int SAVE_ID_0 = 0;
+    public static final int SAVE_ID_1 = 1;
 
     private SQLiteDatabase db;
 
@@ -28,10 +32,11 @@ public class CellRepository {
         for (Cell[] cellCol : cage.cells) {
             for (Cell cell : cellCol) {
                 ContentValues values = new ContentValues();
-                values.put(COLUMN_CELL_X, cell.getX());
-                values.put(COLUMN_CELL_Y, cell.getY());
-                values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
-                values.put(COLUMN_CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
+                values.put(CELL_X, cell.getX());
+                values.put(CELL_Y, cell.getY());
+                values.put(CELL_TYPE, cell.getCellType().name());
+                values.put(CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
+                values.put(CELL_SAVE_ID, cell.getSaveId());
                 db.insert(TABLE_CELL, null, values);
             }
         }
@@ -44,9 +49,10 @@ public class CellRepository {
         return cageExists;
     }
 
-    public Cage getPlainCage() {
+    public Cage getPlainCage(int saveId) {
 
-        Cursor cursor = db.query(TABLE_CELL, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CELL, null, CELL_SAVE_ID + " = ?",
+                new String[]{String.valueOf(saveId)}, null, null, null);
 
         Cell[][] cells = new Cell[CELL_COUNT][CELL_COUNT];
 
@@ -54,10 +60,11 @@ public class CellRepository {
             for (int x = 0; x < CELL_COUNT; x++) {
                 cursor.moveToNext();
                 Cell cell = new Cell();
-                cell.setX(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_X)));
-                cell.setY(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_Y)));
-                cell.setCellType(CellType.valueOf(cursor.getString(cursor.getColumnIndex(COLUMN_CELL_TYPE))));
-                cell.setIndexInGroup(cursor.getInt(cursor.getColumnIndex(COLUMN_CELL_INDEX_IN_GROUP)));
+                cell.setX(cursor.getInt(cursor.getColumnIndex(CELL_X)));
+                cell.setY(cursor.getInt(cursor.getColumnIndex(CELL_Y)));
+                cell.setCellType(CellType.valueOf(cursor.getString(cursor.getColumnIndex(CELL_TYPE))));
+                cell.setIndexInGroup(cursor.getInt(cursor.getColumnIndex(CELL_INDEX_IN_GROUP)));
+                cell.setSaveId(cursor.getInt(cursor.getColumnIndex(CELL_SAVE_ID)));
                 cells[y][x] = cell;
             }
         }
@@ -70,17 +77,14 @@ public class CellRepository {
     public void updateCell(Cell cell) {
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CELL_TYPE, cell.getCellType().name());
-        values.put(COLUMN_CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
-
-        String selection = COLUMN_CELL_X + " = ? AND " + COLUMN_CELL_Y + " = ? ";
-        String[] selectionArgs = {String.valueOf(cell.getX()), String.valueOf(cell.getY())};
+        values.put(CELL_TYPE, cell.getCellType().name());
+        values.put(CELL_INDEX_IN_GROUP, cell.getIndexInGroup());
 
         db.update(
                 TABLE_CELL,
                 values,
-                selection,
-                selectionArgs);
+                CELL_X + " = ? AND " + CELL_Y + " = ? ",
+                new String[]{String.valueOf(cell.getX()), String.valueOf(cell.getY())});
 
     }
 
