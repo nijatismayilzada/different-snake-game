@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_1;
+
 public class SaveGameOCL implements View.OnClickListener {
     private AppCompatActivity activity;
     private LevelRepository levelRepository;
@@ -15,7 +17,7 @@ public class SaveGameOCL implements View.OnClickListener {
     public SaveGameOCL(AppCompatActivity activity, LevelRepository levelRepository) {
         this.activity = activity;
         this.levelRepository = levelRepository;
-        this.saveButton = activity.findViewById(R.id.saveGame);
+        this.saveButton = this.activity.findViewById(R.id.loadSave);
         setupButton();
     }
 
@@ -27,7 +29,7 @@ public class SaveGameOCL implements View.OnClickListener {
     public void setupButton() {
         saveButton.setVisibility(View.VISIBLE);
 
-        if (levelRepository.getCurrentLevelDetails() == null) {
+        if (levelRepository.getCurrentLevelDetails(SAVE_ID_1) == null) {
             saveButton.setVisibility(View.GONE);
         }
     }

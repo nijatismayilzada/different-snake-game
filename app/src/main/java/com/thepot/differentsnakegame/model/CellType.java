@@ -17,7 +17,8 @@ public enum CellType {
     POISON(R.drawable.ic_remove_circle_24px, true, true),
     FOOD_MOVE_TO_NEXT_LEVEL(R.drawable.ic_add_circle_24px, true, true),
     WALL(R.drawable.ic_border_all_white_24dp, false, true),
-    OBSTACLE(R.drawable.ic_border_outer_white_24dp, true, true);
+    OBSTACLE(R.drawable.ic_border_outer_white_24dp, true, true),
+    SAVE(R.drawable.ic_cloud_upload_white_24dp, true, true);
 
 
     private int resource;

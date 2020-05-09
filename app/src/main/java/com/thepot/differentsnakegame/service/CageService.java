@@ -13,6 +13,7 @@ import java.util.List;
 
 import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_0;
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_1;
 
 public class CageService {
     public static final int CELL_COUNT = 15;
@@ -73,9 +74,40 @@ public class CageService {
         return cellsFound;
     }
 
-    public Cage getCage() {
+    public void saveCage() {
+        Cage cage = cellRepository.getPlainCage(SAVE_ID_0);
 
-        if (cage == null) {
+        updateSaveId(cage, SAVE_ID_1);
+        cellRepository.deleteSave(SAVE_ID_1);
+        cellRepository.insertCage(cage);
+
+    }
+
+    public void loadSavedCage() {
+        Cage cage = cellRepository.getPlainCage(SAVE_ID_1);
+
+        updateSaveId(cage, SAVE_ID_0);
+        cellRepository.deleteSave(SAVE_ID_0);
+
+        cellRepository.insertCage(cage);
+
+        getCage(true);
+    }
+
+    private void updateSaveId(Cage cage, int saveId) {
+        for (Cell[] cellCol : cage.cells) {
+            for (Cell cell : cellCol) {
+                cell.setSaveId(saveId);
+            }
+        }
+    }
+
+    public Cage getCage() {
+        return getCage(false);
+    }
+
+    private Cage getCage(boolean refreshCage) {
+        if (cage == null || refreshCage) {
             if (cellRepository.cageExists()) {
                 cage = cellRepository.getPlainCage(SAVE_ID_0);
             } else {

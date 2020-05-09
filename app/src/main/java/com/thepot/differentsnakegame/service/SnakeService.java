@@ -40,8 +40,12 @@ public class SnakeService {
     }
 
     public Snake getSnake() {
+        return getSnake(false);
+    }
 
-        if (snake == null) {
+    public Snake getSnake(boolean refreshSnake) {
+
+        if (snake == null || refreshSnake) {
             snake = new Snake();
             snake.snakeBody.addAll(cageService.findCellsOfTypes(SNAKE_BODY,
                     SNAKE_HEAD_DOWN, SNAKE_HEAD_LEFT, SNAKE_HEAD_RIGHT,

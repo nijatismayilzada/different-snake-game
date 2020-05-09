@@ -9,6 +9,8 @@ import com.thepot.differentsnakegame.GameActivity;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_0;
+
 public class ContinueGameOCL implements View.OnClickListener {
     private AppCompatActivity activity;
     private LevelRepository levelRepository;
@@ -33,7 +35,7 @@ public class ContinueGameOCL implements View.OnClickListener {
     public void setupButton() {
         continueButton.setVisibility(View.VISIBLE);
 
-        if (levelRepository.getCurrentLevelDetails() == null) {
+        if (levelRepository.getCurrentLevelDetails(SAVE_ID_0) == null) {
             continueButton.setVisibility(View.GONE);
         }
     }

@@ -53,8 +53,8 @@
             android:layout_marginTop="@dimen/marginMini"
             android:layout_marginBottom="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p"
-            android:textColor="@color/colorWhite"
             android:textAlignment="center"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
     </RelativeLayout>
@@ -111,16 +111,16 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/replay"-->
-        <!--            android:layout_width="@dimen/buttonSmall"-->
-        <!--            android:layout_height="@dimen/buttonSmall"-->
-        <!--            android:layout_below="@id/upButton"-->
-        <!--            android:layout_alignParentStart="true"-->
-        <!--            android:layout_marginStart="@dimen/buttonMargin10"-->
-        <!--            android:layout_marginTop="@dimen/buttonMargin20"-->
-        <!--            android:background="@drawable/ic_replay_white_24dp"-->
-        <!--            android:rotation="270" />-->
+        <ImageButton
+            android:id="@+id/loadSave"
+            android:layout_width="@dimen/buttonSmall"
+            android:layout_height="@dimen/buttonSmall"
+            android:layout_below="@id/upButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/buttonMarginSmall"
+            android:layout_marginTop="@dimen/buttonMarginBig"
+            android:layout_marginEnd="@dimen/buttonMarginSmall"
+            android:background="@drawable/ic_cloud_download_white_24dp" />
 
         <ImageButton
             android:id="@+id/menu"
@@ -130,7 +130,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/buttonMarginBig"
             android:layout_marginEnd="@dimen/buttonMarginSmall"
-            android:background="@drawable/ic_menu_open_white_24dp" />
+            android:background="@drawable/ic_menu_white_24dp" />
 
         <ImageButton
             android:id="@+id/upButton"

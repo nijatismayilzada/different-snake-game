@@ -83,13 +83,17 @@ public class CellRepository {
         db.update(
                 TABLE_CELL,
                 values,
-                CELL_X + " = ? AND " + CELL_Y + " = ? ",
-                new String[]{String.valueOf(cell.getX()), String.valueOf(cell.getY())});
+                CELL_X + " = ? AND " + CELL_Y + " = ? AND " + CELL_SAVE_ID + " = ?",
+                new String[]{String.valueOf(cell.getX()), String.valueOf(cell.getY()), String.valueOf(cell.getSaveId())});
 
     }
 
     public void deleteAllCells() {
         db.delete(TABLE_CELL, null, null);
+    }
+
+    public void deleteSave(int saveId) {
+        db.delete(TABLE_CELL, CELL_SAVE_ID + " = ?", new String[]{String.valueOf(saveId)});
     }
 
 }

@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Random;
 
 import static com.thepot.differentsnakegame.model.CellType.FOOD_MOVE_TO_NEXT_LEVEL;
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_0;
+import static com.thepot.differentsnakegame.repository.CellRepository.SAVE_ID_1;
 
 public class LevelService {
     public static final double END_GAME = -1;
@@ -68,12 +70,18 @@ public class LevelService {
     }
 
     public CurrentLevel getCurrentLevel() {
-        if (currentLevel == null) {
-            currentLevel = levelRepository.getCurrentLevelDetails();
+        return getCurrentLevel(false);
+    }
+
+    public CurrentLevel getCurrentLevel(boolean refreshCurrentLevel) {
+        if (currentLevel == null || refreshCurrentLevel) {
+            currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_0);
             if (currentLevel == null) {
                 currentLevel = new CurrentLevel();
                 currentLevel.setCurrentLevel(0);
                 currentLevel.setMovesLeft(0);
+                currentLevel.setTransparentWall(false);
+                currentLevel.setSaveId(SAVE_ID_0);
                 levelRepository.insertCurrentLevel(currentLevel);
                 loadNextLevel();
             } else {
@@ -83,6 +91,21 @@ public class LevelService {
         }
 
         return currentLevel;
+    }
+
+    public void saveCurrentLevel(){
+        CurrentLevel currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_0);
+        currentLevel.setSaveId(SAVE_ID_1);
+        levelRepository.deleteLevelSave(SAVE_ID_1);
+        levelRepository.insertCurrentLevel(currentLevel);
+    }
+
+    public void loadLevelSave(){
+        CurrentLevel currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_1);
+        currentLevel.setSaveId(SAVE_ID_0);
+        levelRepository.deleteLevelSave(SAVE_ID_0);
+        levelRepository.insertCurrentLevel(currentLevel);
+        getCurrentLevel(true);
     }
 
     public void loadNextLevel() {

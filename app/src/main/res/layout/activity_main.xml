@@ -9,18 +9,6 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/saveGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/continueGame"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:fontFamily="@font/press_start_2p"
-        android:text="@string/save_game_curr"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/mainMenuText" />
-
-    <TextView
         android:id="@+id/continueGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

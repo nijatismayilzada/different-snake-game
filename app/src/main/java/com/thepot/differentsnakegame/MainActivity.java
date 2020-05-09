@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     private HideNavigationOTL hideNavigationOTL;
     private ContinueGameOCL continueGameOCL;
-    private SaveGameOCL saveGameOCL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         hideNavigationOTL = new HideNavigationOTL(this);
         new NewGameOCL(this, levelRepository, cellRepository);
         continueGameOCL = new ContinueGameOCL(this, levelRepository);
-        saveGameOCL = new SaveGameOCL(this, levelRepository);
         new ExitGameOCL(this);
     }
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         hideNavigationOTL.hideSystemUI();
         continueGameOCL.setupButton();
-        saveGameOCL.setupButton();
         super.onNewIntent(intent);
         overridePendingTransition(0, 0);
     }

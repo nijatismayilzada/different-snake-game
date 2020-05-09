@@ -4,6 +4,7 @@ public class CurrentLevel {
     private double currentLevel;
     private int movesLeft;
     private boolean transparentWall;
+    private int saveId;
 
     public CurrentLevel() {
     }
@@ -30,5 +31,13 @@ public class CurrentLevel {
 
     public void setTransparentWall(boolean transparentWall) {
         this.transparentWall = transparentWall;
+    }
+
+    public int getSaveId() {
+        return saveId;
+    }
+
+    public void setSaveId(int saveId) {
+        this.saveId = saveId;
     }
 }
