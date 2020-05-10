@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Fərqli İlan Oyunu</string>
+    <string name="level">Mərhələ:</string>
+    <string name="game_over">UDUZDUN!</string>
+    <string name="game_end">OYUNUN SONU!</string>
+    <string name="moves">\ Gediş\n qalıb</string>
+    <string name="new_game">Yeni oyun</string>
+    <string name="continue_game">Davam et</string>
+    <string name="about">Haqqında</string>
+    <string name="exit">Çıxış</string>
+</resources>

@@ -52,7 +52,7 @@
             android:layout_marginStart="@dimen/marginMini"
             android:layout_marginTop="@dimen/marginMini"
             android:layout_marginBottom="@dimen/marginMini"
-            android:fontFamily="@font/press_start_2p"
+            android:fontFamily="@font/press_start_2p_az"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
@@ -73,7 +73,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/marginMini"
             android:layout_marginTop="@dimen/marginMini"
-            android:fontFamily="@font/press_start_2p"
+            android:fontFamily="@font/press_start_2p_az"
             android:text="@string/level"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginMini"
             android:layout_toEndOf="@id/level"
-            android:fontFamily="@font/press_start_2p"
+            android:fontFamily="@font/press_start_2p_az"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
@@ -96,7 +96,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/marginMini"
             android:layout_marginEnd="@dimen/marginMini"
-            android:fontFamily="@font/press_start_2p"
+            android:fontFamily="@font/press_start_2p_az"
             android:text="@string/moves"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginMini"
             android:layout_toStartOf="@id/moves"
-            android:fontFamily="@font/press_start_2p"
+            android:fontFamily="@font/press_start_2p_az"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
@@ -138,7 +138,7 @@
             android:layout_height="@dimen/button"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/buttonMargin"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px"
+            android:background="@drawable/ic_keyboard_arrow_down_white_24dp"
             android:rotation="180" />
 
         <ImageButton
@@ -149,7 +149,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/buttonMargin"
             android:layout_marginBottom="@dimen/marginMini"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px" />
+            android:background="@drawable/ic_keyboard_arrow_down_white_24dp" />
 
         <ImageButton
             android:id="@+id/leftButton"
@@ -157,7 +157,7 @@
             android:layout_height="@dimen/button"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/upButton"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px"
+            android:background="@drawable/ic_keyboard_arrow_down_white_24dp"
             android:rotation="90" />
 
         <ImageButton
@@ -166,7 +166,7 @@
             android:layout_height="@dimen/button"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/upButton"
-            android:background="@drawable/ic_arrow_drop_down_circle_24px"
+            android:background="@drawable/ic_keyboard_arrow_down_white_24dp"
             android:rotation="270" />
 
     </RelativeLayout>
