@@ -2,15 +2,15 @@ package com.thepot.differentsnakegame.clicklistener.menu;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.GameActivity;
-import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.LevelRepository;
 
-public class NewGameOCL implements View.OnClickListener {
+public class NewGameOCL implements OnClickListener {
     public static final String NEW_GAME = "NEW_GAME";
     private AppCompatActivity activity;
     private LevelRepository levelRepository;
@@ -20,7 +20,6 @@ public class NewGameOCL implements View.OnClickListener {
         this.activity = activity;
         this.levelRepository = levelRepository;
         this.cellRepository = cellRepository;
-        this.activity.findViewById(R.id.newGame).setOnClickListener(this);
     }
 
     @Override

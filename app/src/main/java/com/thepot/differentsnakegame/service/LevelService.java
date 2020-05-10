@@ -73,6 +73,10 @@ public class LevelService {
         return getCurrentLevel(false);
     }
 
+    public boolean gameSaveExists() {
+        return levelRepository.getCurrentLevelDetails(SAVE_ID_1) != null;
+    }
+
     public CurrentLevel getCurrentLevel(boolean refreshCurrentLevel) {
         if (currentLevel == null || refreshCurrentLevel) {
             currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_0);

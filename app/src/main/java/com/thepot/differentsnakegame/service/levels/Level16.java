@@ -4,6 +4,7 @@ import com.thepot.differentsnakegame.service.LevelService;
 
 import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
+import static com.thepot.differentsnakegame.model.CellType.SAVE;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
 
 public class Level16 implements Level {
@@ -45,6 +46,11 @@ public class Level16 implements Level {
         levelService.addLevelCell(11, 3, FOOD);
         levelService.addLevelCell(11, 11, FOOD);
 
+
+        levelService.addLevelCell(5, 5, SAVE);
+        levelService.addLevelCell(5, 9, SAVE);
+        levelService.addLevelCell(9, 5, SAVE);
+        levelService.addLevelCell(9, 9, SAVE);
 
         levelService.addLevelCell(0, 4, WALL);
         levelService.addLevelCell(1, 4, WALL);

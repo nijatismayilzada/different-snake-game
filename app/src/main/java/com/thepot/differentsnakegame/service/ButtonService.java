@@ -5,14 +5,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.thepot.differentsnakegame.Board;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.DownButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.LeftButtonOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.LoadSaveOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.RightButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.UpButtonOCL;
 import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.CellType;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.service.CageService.CELL_MAX_ID;
@@ -24,13 +28,14 @@ public class ButtonService {
     private ImageButton downButton;
     private ImageButton leftButton;
     private ImageButton rightButton;
+    private ImageButton loadSaveButton;
     private TextView gameState;
 
     private CageService cageService;
     private SnakeService snakeService;
     private LevelService levelService;
 
-    public ButtonService(AppCompatActivity activity, CageService cageService, SnakeService snakeService, LevelService levelService) {
+    public ButtonService(AppCompatActivity activity, CageService cageService, SnakeService snakeService, LevelService levelService, Board board) {
         this.cageService = cageService;
         this.snakeService = snakeService;
         this.levelService = levelService;
@@ -43,11 +48,23 @@ public class ButtonService {
         leftButton.setOnClickListener(new LeftButtonOCL(snakeService));
         rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
+        loadSaveButton = activity.findViewById(R.id.loadSave);
+        loadSaveButton.setOnClickListener(new LoadSaveOCL(snakeService, cageService, levelService, board));
 
         gameState = activity.findViewById(R.id.gameStateText);
     }
 
+    private void setupLoadSaveButton() {
+        loadSaveButton.setVisibility(GONE);
+
+        if (levelService.gameSaveExists()) {
+            loadSaveButton.setVisibility(VISIBLE);
+        }
+    }
+
+
     public void updateButtons() {
+        setupLoadSaveButton();
 
         upButton.setClickable(true);
         downButton.setClickable(true);

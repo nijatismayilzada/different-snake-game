@@ -99,41 +99,55 @@ public class SnakeService {
         switch (newHead.getCellType()) {
             case FOOD_MOVE_TO_NEXT_LEVEL:
                 levelService.loadNextLevel();
+                addHead(cellType, newHead);
                 break;
             case FLARE:
                 while (getSnake().snakeBody.size() != 6) {
-                    defaultMove();
+                    removeTail();
                 }
                 levelService.loadNextLevel();
+                addHead(cellType, newHead);
                 break;
             case FOOD:
                 if (cageService.findCellsOfTypes(FOOD, FLARE).size() == 1) {
                     levelService.loadNextLevel();
                 }
+                addHead(cellType, newHead);
                 break;
             case POISON:
                 while (getSnake().snakeBody.size() != 1) {
-                    defaultMove();
+                    removeTail();
                 }
+                addHead(cellType, newHead);
                 break;
             case OBSTACLE:
                 levelService.addLevelCell(YAhead, XAhead, OBSTACLE);
-                defaultMove();
+                removeTail();
+                addHead(cellType, newHead);
+                break;
+            case SAVE:
+                removeTail();
+                addHead(cellType, newHead);
+                levelService.saveCurrentLevel();
+                cageService.saveCage();
                 break;
             default:
-                defaultMove();
+                removeTail();
+                addHead(cellType, newHead);
                 break;
         }
+        board.clearAndDraw();
+    }
 
+    private void addHead(CellType cellType, Cell newHead) {
         getSnake().snakeBody.add(newHead);
         cageService.updateCellType(newHead, cellType);
         for (int i = 0; i < getSnake().snakeBody.size(); i++) {
             cageService.updateCellIndex(getSnake().snakeBody.get(i), i);
         }
-        board.clearAndDraw();
     }
 
-    private void defaultMove() {
+    private void removeTail() {
         cageService.updateCellType(getSnake().snakeBody.get(0), EMPTY);
         getSnake().snakeBody.remove(0);
     }

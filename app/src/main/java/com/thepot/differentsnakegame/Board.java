@@ -2,7 +2,6 @@ package com.thepot.differentsnakegame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,7 +42,7 @@ public class Board {
 
         mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackgroundBlack, null);
 
-        activity.<ImageButton>findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
+        activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
 
         movesHolderText = activity.findViewById(R.id.movesHolder);
         levelHolderText = activity.findViewById(R.id.levelHolder);
@@ -52,7 +51,7 @@ public class Board {
         clearAndDraw();
     }
 
-    public void initialiseServices(AppCompatActivity appCompatActivity, ImageView boardHolder) {
+    private void initialiseServices(AppCompatActivity appCompatActivity, ImageView boardHolder) {
         DatabaseDetails databaseDetails = new DatabaseDetails(appCompatActivity);
         CellRepository cellRepository = new CellRepository(databaseDetails);
         CageService cageService = new CageService(cellRepository, boardHolder);
@@ -60,7 +59,7 @@ public class Board {
         levelService = new LevelService(appCompatActivity, cageService, levelRepository);
         snakeService = new SnakeService(appCompatActivity, cageService, levelService, this);
         borderService = new BorderService(appCompatActivity, cageService, levelService);
-        buttonService = new ButtonService(activity, cageService, snakeService, levelService);
+        buttonService = new ButtonService(activity, cageService, snakeService, levelService, this);
     }
 
     public void clearAndDraw() {

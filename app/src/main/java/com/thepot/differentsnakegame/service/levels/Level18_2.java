@@ -5,6 +5,7 @@ import com.thepot.differentsnakegame.service.LevelService;
 import static com.thepot.differentsnakegame.model.CellType.FOOD;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
 import static com.thepot.differentsnakegame.model.CellType.POISON;
+import static com.thepot.differentsnakegame.model.CellType.SAVE;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
 import static com.thepot.differentsnakegame.service.LevelService.END_GAME;
 
@@ -112,6 +113,8 @@ public class Level18_2 implements Level {
 
         levelService.addLevelCell(3, 7, POISON);
         levelService.addLevelCell(12, 3, POISON);
+
+        levelService.addLevelCell(14, 0, SAVE);
 
         levelService.addLevelCell(6, 0, FOOD);
         levelService.addLevelCell(7, 3, FOOD);

@@ -4,6 +4,7 @@ import com.thepot.differentsnakegame.service.LevelService;
 
 import static com.thepot.differentsnakegame.model.CellType.FOOD_MOVE_TO_NEXT_LEVEL;
 import static com.thepot.differentsnakegame.model.CellType.OBSTACLE;
+import static com.thepot.differentsnakegame.model.CellType.SAVE;
 import static com.thepot.differentsnakegame.model.CellType.WALL;
 
 public class Level15 implements Level {
@@ -19,6 +20,7 @@ public class Level15 implements Level {
         levelService.updateMoveCount(-1);
 
         levelService.addLevelCell(7, 7, FOOD_MOVE_TO_NEXT_LEVEL);
+        levelService.addLevelCell(6, 6, SAVE);
         levelService.addLevelCell(5, 5, WALL);
         levelService.addLevelCell(5, 6, WALL);
         levelService.addLevelCell(5, 7, WALL);

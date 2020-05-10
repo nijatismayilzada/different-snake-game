@@ -20,7 +20,6 @@ public class ContinueGameOCL implements View.OnClickListener {
         this.activity = activity;
         this.levelRepository = levelRepository;
         this.continueButton = this.activity.findViewById(R.id.continueGame);
-        this.continueButton.setOnClickListener(this);
         setupButton();
     }
 

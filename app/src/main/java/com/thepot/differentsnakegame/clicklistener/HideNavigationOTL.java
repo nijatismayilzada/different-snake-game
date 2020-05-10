@@ -5,15 +5,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thepot.differentsnakegame.R;
-
 public class HideNavigationOTL implements View.OnTouchListener {
 
     private AppCompatActivity activity;
 
     public HideNavigationOTL(AppCompatActivity activity) {
         this.activity = activity;
-        this.activity.findViewById(R.id.activity_main).setOnTouchListener(this);
         hideSystemUI();
     }
 
