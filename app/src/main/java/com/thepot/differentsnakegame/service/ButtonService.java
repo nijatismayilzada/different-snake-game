@@ -10,6 +10,7 @@ import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.DownButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.LeftButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.LoadSaveOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.MenuButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.RightButtonOCL;
 import com.thepot.differentsnakegame.clicklistener.gamebuttons.UpButtonOCL;
 import com.thepot.differentsnakegame.model.Cell;
@@ -35,7 +36,7 @@ public class ButtonService {
     private SnakeService snakeService;
     private LevelService levelService;
 
-    public ButtonService(AppCompatActivity activity, CageService cageService, SnakeService snakeService, LevelService levelService, Board board) {
+    public ButtonService(AppCompatActivity activity, CageService cageService, SnakeService snakeService, LevelService levelService, Board board, AdsService adsService) {
         this.cageService = cageService;
         this.snakeService = snakeService;
         this.levelService = levelService;
@@ -50,7 +51,7 @@ public class ButtonService {
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
         loadSaveButton = activity.findViewById(R.id.loadSave);
         loadSaveButton.setOnClickListener(new LoadSaveOCL(snakeService, cageService, levelService, board));
-
+        activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity, adsService));
         gameState = activity.findViewById(R.id.gameStateText);
     }
 

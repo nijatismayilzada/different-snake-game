@@ -20,7 +20,7 @@
             android:layout_height="@dimen/bannerHeight"
             android:layout_alignParentStart="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+            ads:adUnitId="ca-app-pub-3436517585020059/9992262981" />
 
     </RelativeLayout>
 

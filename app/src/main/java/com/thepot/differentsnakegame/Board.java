@@ -8,10 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.thepot.differentsnakegame.clicklistener.gamebuttons.MenuButtonOCL;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.DatabaseDetails;
 import com.thepot.differentsnakegame.repository.LevelRepository;
+import com.thepot.differentsnakegame.service.AdsService;
 import com.thepot.differentsnakegame.service.BorderService;
 import com.thepot.differentsnakegame.service.ButtonService;
 import com.thepot.differentsnakegame.service.CageService;
@@ -42,8 +42,6 @@ public class Board {
 
         mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackgroundBlack, null);
 
-        activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
-
         movesHolderText = activity.findViewById(R.id.movesHolder);
         levelHolderText = activity.findViewById(R.id.levelHolder);
 
@@ -59,7 +57,8 @@ public class Board {
         levelService = new LevelService(appCompatActivity, cageService, levelRepository);
         snakeService = new SnakeService(appCompatActivity, cageService, levelService, this);
         borderService = new BorderService(appCompatActivity, cageService, levelService);
-        buttonService = new ButtonService(activity, cageService, snakeService, levelService, this);
+        AdsService adsService = new AdsService(activity);
+        buttonService = new ButtonService(activity, cageService, snakeService, levelService, this, adsService);
     }
 
     public void clearAndDraw() {
