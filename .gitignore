@@ -1,4 +1,10 @@
 *.iml
+*.apk
+*.aar
+*.ap_
+*.aab
+*.dex
+*.class
 .gradle
 /local.properties
 /.idea/caches
@@ -14,3 +20,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/release
