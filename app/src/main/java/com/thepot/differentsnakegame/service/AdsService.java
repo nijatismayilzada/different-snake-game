@@ -6,12 +6,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.AdL;
 import com.thepot.differentsnakegame.clicklistener.AdsOICL;
-
-import static java.util.Collections.singletonList;
 
 public class AdsService {
 

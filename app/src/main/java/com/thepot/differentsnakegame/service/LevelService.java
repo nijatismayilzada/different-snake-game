@@ -97,14 +97,14 @@ public class LevelService {
         return currentLevel;
     }
 
-    public void saveCurrentLevel(){
+    public void saveCurrentLevel() {
         CurrentLevel currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_0);
         currentLevel.setSaveId(SAVE_ID_1);
         levelRepository.deleteLevelSave(SAVE_ID_1);
         levelRepository.insertCurrentLevel(currentLevel);
     }
 
-    public void loadLevelSave(){
+    public void loadLevelSave() {
         CurrentLevel currentLevel = levelRepository.getCurrentLevelDetails(SAVE_ID_1);
         currentLevel.setSaveId(SAVE_ID_0);
         levelRepository.deleteLevelSave(SAVE_ID_0);

@@ -6,7 +6,6 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thepot.differentsnakegame.clicklistener.AdsOICL;
 import com.thepot.differentsnakegame.clicklistener.BoardHolderObserver;
 import com.thepot.differentsnakegame.clicklistener.HideNavigationOTL;
 

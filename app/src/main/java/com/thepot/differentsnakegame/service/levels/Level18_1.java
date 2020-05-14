@@ -123,7 +123,6 @@ public class Level18_1 implements Level {
         levelService.addLevelCell(14, 13, FOOD);
 
 
-
         levelService.addLevelCell(6, 0, FOOD);
         levelService.addLevelCell(7, 3, FOOD);
         levelService.addLevelCell(7, 11, FOOD);
