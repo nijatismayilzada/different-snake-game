@@ -2,6 +2,9 @@
 
 Different Snake Game is a small indie game. It is a puzzle game designed to show the capabilities of basic Android Graphics. During the development of this, I have not used any gamin libraries. All graphics are drawn by Android Graphics library on plain canvas. A couple of specific points worth mentioning:
 
+You can download it from Play Store:
+https://play.google.com/store/apps/details?id=com.thepot.differentsnakegame
+
 * Game board size, cell size are dynamically calculated at the start of the game. This was required since every device is different, therefore you have to calculate properly for knowing where to draw game objects, such as snake, cells, etc.
 * All game objects are vector graphics (except launcher icon), so they are screen size independent. 
 * Game uses SQLite database to store and load all game details. This lets me continue the game from the same point as the user left, while also providing a separate checkpoint system.
