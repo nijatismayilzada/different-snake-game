@@ -1,4 +1,4 @@
-#Different Snake Game
+# Different Snake Game
 
 Different Snake Game is a small indie game. It is a puzzle game designed to show the capabilities of basic Android Graphics. During the development of this, I have not used any gamin libraries. All graphics are drawn by Android Graphics library on plain canvas. A couple of specific points worth mentioning:
 
