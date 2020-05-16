@@ -14,7 +14,7 @@ public class AdsService {
 
     private InterstitialAd interstitialAd;
     private int clickCount;
-    private static final int CLICK_THRESHOLD = 3;
+    private static final int CLICK_THRESHOLD = 2;
 
     public AdsService(AppCompatActivity activity) {
 
