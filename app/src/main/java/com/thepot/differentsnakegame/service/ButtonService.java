@@ -50,22 +50,24 @@ public class ButtonService {
         rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
         loadSaveButton = activity.findViewById(R.id.loadSave);
-        loadSaveButton.setOnClickListener(new LoadSaveOCL(snakeService, cageService, levelService, board));
+        loadSaveButton.setOnClickListener(new LoadSaveOCL(board));
+        showLoadSaveButton(levelService.gameSaveExists());
+
+
         activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity, adsService));
         gameState = activity.findViewById(R.id.gameStateText);
     }
 
-    private void setupLoadSaveButton() {
-        loadSaveButton.setVisibility(GONE);
 
-        if (levelService.gameSaveExists()) {
+    public void showLoadSaveButton(boolean show) {
+        if (show) {
             loadSaveButton.setVisibility(VISIBLE);
+        } else {
+            loadSaveButton.setVisibility(GONE);
         }
     }
 
-
     public void updateButtons() {
-        setupLoadSaveButton();
 
         upButton.setClickable(true);
         downButton.setClickable(true);

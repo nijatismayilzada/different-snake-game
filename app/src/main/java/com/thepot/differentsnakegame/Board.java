@@ -11,6 +11,9 @@ import androidx.core.content.res.ResourcesCompat;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.DatabaseDetails;
 import com.thepot.differentsnakegame.repository.LevelRepository;
+import com.thepot.differentsnakegame.runnable.HideSaveRunnable;
+import com.thepot.differentsnakegame.runnable.SaveRunnable;
+import com.thepot.differentsnakegame.runnable.ShowSaveRunnable;
 import com.thepot.differentsnakegame.service.AdsService;
 import com.thepot.differentsnakegame.service.BorderService;
 import com.thepot.differentsnakegame.service.ButtonService;
@@ -32,6 +35,9 @@ public class Board {
     private SnakeService snakeService;
     private BorderService borderService;
     private ButtonService buttonService;
+    private CageService cageService;
+    private ShowSaveRunnable showSaveRunnable;
+    private HideSaveRunnable hideSaveRunnable;
 
 
     public Board(AppCompatActivity context, ImageView boardHolder) {
@@ -52,13 +58,15 @@ public class Board {
     private void initialiseServices(AppCompatActivity appCompatActivity, ImageView boardHolder) {
         DatabaseDetails databaseDetails = new DatabaseDetails(appCompatActivity);
         CellRepository cellRepository = new CellRepository(databaseDetails);
-        CageService cageService = new CageService(cellRepository, boardHolder);
+        cageService = new CageService(cellRepository, boardHolder);
         LevelRepository levelRepository = new LevelRepository(databaseDetails);
         levelService = new LevelService(appCompatActivity, cageService, levelRepository);
-        snakeService = new SnakeService(appCompatActivity, cageService, levelService, this);
+        snakeService = new SnakeService(appCompatActivity, cageService, levelService, this, new SaveRunnable(this));
         borderService = new BorderService(appCompatActivity, cageService, levelService);
         AdsService adsService = new AdsService(activity);
         buttonService = new ButtonService(activity, cageService, snakeService, levelService, this, adsService);
+        showSaveRunnable = new ShowSaveRunnable(buttonService);
+        hideSaveRunnable = new HideSaveRunnable(buttonService);
     }
 
     public void clearAndDraw() {
@@ -75,6 +83,22 @@ public class Board {
         levelHolderText.setText(doubleToString(levelService.getCurrentLevel().getCurrentLevel()));
 
         boardHolder.invalidate();
+    }
+
+    public void loadSave() {
+        cageService.loadSavedCage();
+        levelService.loadLevelSave();
+        snakeService.getSnake(true);
+        clearAndDraw();
+    }
+
+    public void saveGame() {
+        activity.runOnUiThread(hideSaveRunnable);
+
+        levelService.saveCurrentLevel();
+        cageService.saveCage();
+
+        activity.runOnUiThread(showSaveRunnable);
     }
 
     private String doubleToString(double d) {
