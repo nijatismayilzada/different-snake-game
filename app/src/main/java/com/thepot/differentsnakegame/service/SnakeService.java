@@ -2,10 +2,13 @@ package com.thepot.differentsnakegame.service;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.Board;
+import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.model.Cell;
 import com.thepot.differentsnakegame.model.CellType;
 import com.thepot.differentsnakegame.model.Snake;
@@ -16,6 +19,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static com.thepot.differentsnakegame.model.CellType.EMPTY;
 import static com.thepot.differentsnakegame.model.CellType.FLARE;
 import static com.thepot.differentsnakegame.model.CellType.FOOD;
@@ -32,8 +37,9 @@ public class SnakeService {
     private CageService cageService;
     private LevelService levelService;
     private Board board;
+    private TextView gameState;
     private SaveRunnable saveRunnable;
-    private ThreadPoolExecutor threadPoolExecutor;
+    private ThreadPoolExecutor gameSaver;
 
 
     private Snake snake;
@@ -43,8 +49,11 @@ public class SnakeService {
         this.cageService = cageService;
         this.levelService = levelService;
         this.board = board;
+
+        gameState = appCompatActivity.findViewById(R.id.gameStateText);
+
         this.saveRunnable = saveRunnable;
-        threadPoolExecutor = new ThreadPoolExecutor(1, 1, 0, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>());
+        gameSaver = new ThreadPoolExecutor(1, 1, 0, TimeUnit.NANOSECONDS, new LinkedBlockingQueue<Runnable>());
     }
 
     public Snake getSnake() {
@@ -101,6 +110,14 @@ public class SnakeService {
 
     public void makeNewHead(int Y, int X, int YAhead, int XAhead, CellType cellType) {
 
+
+        ImageButton loadSaveButton = appCompatActivity.findViewById(R.id.loadSave);
+        if (levelService.gameSaveExists()) {
+            loadSaveButton.setVisibility(VISIBLE);
+        }
+
+        gameState.setText("");
+
         levelService.updateMoveCount(levelService.getCurrentLevel().getMovesLeft() - 1);
         Cell newHead = cageService.getCage().cells[Y][X];
 
@@ -136,7 +153,11 @@ public class SnakeService {
             case SAVE:
                 removeTail();
                 addHead(cellType, newHead);
-                threadPoolExecutor.execute(saveRunnable);
+                if (levelService.getCurrentLevel().getCurrentLevel() == 2) {
+                    gameState.setText(R.string.checkpoint);
+                }
+                loadSaveButton.setVisibility(INVISIBLE);
+                gameSaver.execute(saveRunnable);
                 break;
             default:
                 removeTail();

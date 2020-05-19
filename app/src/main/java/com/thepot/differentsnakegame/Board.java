@@ -21,8 +21,10 @@ import com.thepot.differentsnakegame.service.CageService;
 import com.thepot.differentsnakegame.service.LevelService;
 import com.thepot.differentsnakegame.service.SnakeService;
 
-import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class Board {
     private int mColorBackground;
@@ -32,6 +34,8 @@ public class Board {
     private LevelService levelService;
     private TextView levelHolderText;
     private TextView movesHolderText;
+    private TextView movesHolderView;
+    private TextView gameState;
     private SnakeService snakeService;
     private BorderService borderService;
     private ButtonService buttonService;
@@ -49,7 +53,9 @@ public class Board {
         mColorBackground = ResourcesCompat.getColor(activity.getResources(), R.color.colorBackgroundBlack, null);
 
         movesHolderText = activity.findViewById(R.id.movesHolder);
+        movesHolderView = activity.findViewById(R.id.moves);
         levelHolderText = activity.findViewById(R.id.levelHolder);
+        gameState = activity.findViewById(R.id.gameStateText);
 
         initialiseServices(activity, boardHolder);
         clearAndDraw();
@@ -63,7 +69,7 @@ public class Board {
         levelService = new LevelService(appCompatActivity, cageService, levelRepository);
         snakeService = new SnakeService(appCompatActivity, cageService, levelService, this, new SaveRunnable(this));
         borderService = new BorderService(appCompatActivity, cageService, levelService);
-        AdsService adsService = new AdsService(activity);
+        AdsService adsService = new AdsService(activity, this);
         buttonService = new ButtonService(activity, cageService, snakeService, levelService, this, adsService);
         showSaveRunnable = new ShowSaveRunnable(buttonService);
         hideSaveRunnable = new HideSaveRunnable(buttonService);
@@ -77,8 +83,14 @@ public class Board {
         levelService.drawLevel(canvas);
         buttonService.updateButtons();
 
-        movesHolderText.setText(levelService.getCurrentLevel().getMovesLeft() < 0 ?
-                DecimalFormatSymbols.getInstance().getInfinity() : String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
+        if (levelService.getCurrentLevel().getMovesLeft() < 0) {
+            movesHolderView.setVisibility(INVISIBLE);
+            movesHolderText.setVisibility(INVISIBLE);
+        } else {
+            movesHolderView.setVisibility(VISIBLE);
+            movesHolderText.setVisibility(VISIBLE);
+            movesHolderText.setText(String.valueOf(levelService.getCurrentLevel().getMovesLeft()));
+        }
 
         levelHolderText.setText(doubleToString(levelService.getCurrentLevel().getCurrentLevel()));
 
@@ -86,6 +98,7 @@ public class Board {
     }
 
     public void loadSave() {
+        gameState.setText("");
         cageService.loadSavedCage();
         levelService.loadLevelSave();
         snakeService.getSnake(true);

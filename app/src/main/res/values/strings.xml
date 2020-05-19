@@ -6,6 +6,7 @@
     <string name="moves">\ MOVES\n LEFT</string>
     <string name="new_game">NEW GAME</string>
     <string name="continue_game">CONTINUE</string>
+    <string name="checkpoint">Checkpoint!</string>
     <string name="about">ABOUT</string>
     <string name="exit">EXIT</string>
 </resources>

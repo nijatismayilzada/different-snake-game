@@ -6,6 +6,7 @@
     <string name="moves">\ Gediş\n qalıb</string>
     <string name="new_game">Yeni oyun</string>
     <string name="continue_game">Davam et</string>
+    <string name="checkpoint">Qeyd edildi!</string>
     <string name="about">Haqqında</string>
     <string name="exit">Çıxış</string>
 </resources>

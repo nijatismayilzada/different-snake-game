@@ -11,6 +11,6 @@ public class ShowSaveRunnable implements Runnable {
 
     @Override
     public void run() {
-        buttonService.showLoadSaveButton(true);
+        buttonService.clickableLoadSaveButton(true);
     }
 }

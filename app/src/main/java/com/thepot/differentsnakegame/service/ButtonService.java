@@ -35,11 +35,13 @@ public class ButtonService {
     private CageService cageService;
     private SnakeService snakeService;
     private LevelService levelService;
+    private AppCompatActivity activity;
 
     public ButtonService(AppCompatActivity activity, CageService cageService, SnakeService snakeService, LevelService levelService, Board board, AdsService adsService) {
         this.cageService = cageService;
         this.snakeService = snakeService;
         this.levelService = levelService;
+        this.activity = activity;
 
         upButton = activity.findViewById(R.id.upButton);
         upButton.setOnClickListener(new UpButtonOCL(snakeService));
@@ -50,12 +52,13 @@ public class ButtonService {
         rightButton = activity.findViewById(R.id.rightButton);
         rightButton.setOnClickListener(new RightButtonOCL(snakeService));
         loadSaveButton = activity.findViewById(R.id.loadSave);
-        loadSaveButton.setOnClickListener(new LoadSaveOCL(board));
+        loadSaveButton.setOnClickListener(new LoadSaveOCL(board, adsService));
         showLoadSaveButton(levelService.gameSaveExists());
 
 
-        activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity, adsService));
+        activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
         gameState = activity.findViewById(R.id.gameStateText);
+        gameState.setText("");
     }
 
 
@@ -67,12 +70,21 @@ public class ButtonService {
         }
     }
 
+    public void clickableLoadSaveButton(boolean show) {
+        loadSaveButton.setClickable(show);
+    }
+
     public void updateButtons() {
 
         upButton.setClickable(true);
         downButton.setClickable(true);
         leftButton.setClickable(true);
         rightButton.setClickable(true);
+        upButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+        downButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+        leftButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+        rightButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+
 
         Cell snakeHead = snakeService.getSnakeHead();
 
@@ -83,6 +95,7 @@ public class ButtonService {
                 || cantGoUp(yUp)
                 || (getCellType(yUp, snakeHead.getX()) == OBSTACLE && cantMoveUp(yUp2))) {
             upButton.setClickable(false);
+            upButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_gray_24dp));
         }
 
 
@@ -93,6 +106,7 @@ public class ButtonService {
                 || cantGoDown(yBottom)
                 || (getCellType(yBottom, snakeHead.getX()) == OBSTACLE && cantMoveDown(yBottom2))) {
             downButton.setClickable(false);
+            downButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_gray_24dp));
         }
 
 
@@ -103,6 +117,7 @@ public class ButtonService {
                 || cantGoLeft(xLeft)
                 || (getCellType(snakeHead.getY(), xLeft) == OBSTACLE && cantMoveLeft(xLeft2))) {
             leftButton.setClickable(false);
+            leftButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_gray_24dp));
         }
 
         int xRight = checkEdge(snakeHead.getX() + 1 > CELL_MAX_ID, snakeHead.getX() + 1, CELL_MIN_ID);
@@ -112,11 +127,10 @@ public class ButtonService {
                 || cantGoRight(xRight)
                 || (getCellType(snakeHead.getY(), xRight) == OBSTACLE && cantMoveRight(xRight2))) {
             rightButton.setClickable(false);
+            rightButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_gray_24dp));
         }
 
-        if (upButton.isClickable() || downButton.isClickable() || leftButton.isClickable() || rightButton.isClickable()) {
-            gameState.setText("");
-        } else {
+        if (!upButton.isClickable() && !downButton.isClickable() && !leftButton.isClickable() && !rightButton.isClickable()) {
             gameState.setText(R.string.game_over);
         }
 

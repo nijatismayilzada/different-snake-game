@@ -7,4 +7,5 @@
     <color name="colorBackgroundBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBoardLine">#CFCFCF</color>
+    <color name="colorStatus">#FBC02D</color>
 </resources>

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundBlack"
-    android:orientation="vertical"
     android:keepScreenOn="true"
+    android:orientation="vertical"
     tools:context=".GameActivity">
 
     <RelativeLayout
@@ -22,6 +22,7 @@
             android:layout_alignParentStart="true"
             ads:adSize="BANNER"
             ads:adUnitId="ca-app-pub-3436517585020059/9992262981" />
+        <!--            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />-->
 
     </RelativeLayout>
 
@@ -118,9 +119,8 @@
             android:layout_height="@dimen/buttonSmall"
             android:layout_below="@id/upButton"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/buttonMarginSmall"
-            android:layout_marginTop="@dimen/buttonMarginBig"
-            android:layout_marginEnd="@dimen/buttonMarginSmall"
+            android:layout_marginStart="@dimen/marginMini"
+            android:layout_marginTop="@dimen/marginBigSides"
             android:background="@drawable/ic_cloud_download_white_24dp" />
 
         <ImageButton
@@ -129,8 +129,8 @@
             android:layout_height="@dimen/buttonSmall"
             android:layout_below="@id/upButton"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/buttonMarginBig"
-            android:layout_marginEnd="@dimen/buttonMarginSmall"
+            android:layout_marginTop="@dimen/marginBigSides"
+            android:layout_marginEnd="@dimen/marginMini"
             android:background="@drawable/ic_menu_white_24dp" />
 
         <ImageButton
@@ -138,7 +138,7 @@
             android:layout_width="@dimen/button"
             android:layout_height="@dimen/button"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/buttonMargin"
+            android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/ic_keyboard_arrow_down_white_24dp"
             android:rotation="180" />
 
@@ -148,7 +148,7 @@
             android:layout_height="@dimen/button"
             android:layout_below="@id/upButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/buttonMargin"
+            android:layout_marginTop="@dimen/margin"
             android:layout_marginBottom="@dimen/marginMini"
             android:background="@drawable/ic_keyboard_arrow_down_white_24dp" />
 
