@@ -164,7 +164,7 @@ public class CageService {
 
     public int getCellSize() {
         if (cellSize == null) {
-            cellSize = Math.min(boardHolder.getMeasuredWidth() / CELL_COUNT, boardHolder.getMeasuredHeight() / CELL_COUNT);
+            cellSize = Math.min(boardHolder.getMeasuredWidth() / (CELL_COUNT + 1), boardHolder.getMeasuredHeight() / (CELL_COUNT + 1));
         }
 
         return cellSize;

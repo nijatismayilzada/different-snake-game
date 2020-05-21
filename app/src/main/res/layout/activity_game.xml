@@ -12,8 +12,7 @@
     <RelativeLayout
         android:id="@+id/ads"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true">
+        android:layout_height="wrap_content">
 
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
@@ -21,8 +20,8 @@
             android:layout_height="@dimen/bannerHeight"
             android:layout_alignParentStart="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3436517585020059/9992262981" />
-        <!--            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />-->
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+        <!--            ads:adUnitId="ca-app-pub-3436517585020059/9992262981" />-->
 
     </RelativeLayout>
 
@@ -30,42 +29,21 @@
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/status"
+        android:layout_above="@id/currentLevel"
         android:layout_below="@id/ads">
-
 
         <ImageView
             android:id="@+id/boardHolder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:contentDescription="@string/about" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/status"
+        android:id="@+id/currentLevel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/controls">
-
-        <TextView
-            android:id="@+id/gameStateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="@dimen/marginMini"
-            android:layout_marginTop="@dimen/marginMini"
-            android:layout_marginBottom="@dimen/marginMini"
-            android:fontFamily="@font/press_start_2p_az"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/smallText" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/controls"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_above="@id/status">
 
         <TextView
             android:id="@+id/level"
@@ -98,8 +76,10 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/marginMini"
             android:layout_marginEnd="@dimen/marginMini"
+            android:layout_marginBottom="@dimen/marginMini"
             android:fontFamily="@font/press_start_2p_az"
             android:text="@string/moves"
+            android:textAlignment="textEnd"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
@@ -113,23 +93,53 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/smallText" />
 
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/controls">
+
+        <TextView
+            android:id="@+id/gameStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/status"
+            android:fontFamily="@font/press_start_2p_az"
+            android:padding="@dimen/marginMini"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/smallText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+
         <ImageButton
             android:id="@+id/loadSave"
             android:layout_width="@dimen/buttonSmall"
             android:layout_height="@dimen/buttonSmall"
-            android:layout_below="@id/upButton"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/marginMini"
-            android:layout_marginTop="@dimen/marginBigSides"
+            android:layout_marginTop="@dimen/marginMini"
             android:background="@drawable/ic_cloud_download_white_24dp" />
 
         <ImageButton
             android:id="@+id/menu"
             android:layout_width="@dimen/buttonSmall"
             android:layout_height="@dimen/buttonSmall"
-            android:layout_below="@id/upButton"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/marginBigSides"
+            android:layout_marginTop="@dimen/marginMini"
             android:layout_marginEnd="@dimen/marginMini"
             android:background="@drawable/ic_menu_white_24dp" />
 

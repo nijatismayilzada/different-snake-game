@@ -98,7 +98,7 @@ public class Board {
     }
 
     public void loadSave() {
-        gameState.setText("");
+        gameState.setVisibility(INVISIBLE);
         cageService.loadSavedCage();
         levelService.loadLevelSave();
         snakeService.getSnake(true);

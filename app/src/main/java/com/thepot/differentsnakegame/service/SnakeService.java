@@ -116,7 +116,7 @@ public class SnakeService {
             loadSaveButton.setVisibility(VISIBLE);
         }
 
-        gameState.setText("");
+        gameState.setVisibility(INVISIBLE);
 
         levelService.updateMoveCount(levelService.getCurrentLevel().getMovesLeft() - 1);
         Cell newHead = cageService.getCage().cells[Y][X];
@@ -155,6 +155,7 @@ public class SnakeService {
                 addHead(cellType, newHead);
                 if (levelService.getCurrentLevel().getCurrentLevel() == 2) {
                     gameState.setText(R.string.checkpoint);
+                    gameState.setVisibility(VISIBLE);
                 }
                 loadSaveButton.setVisibility(INVISIBLE);
                 gameSaver.execute(saveRunnable);

@@ -1,5 +1,6 @@
 package com.thepot.differentsnakegame.service;
 
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -58,7 +59,7 @@ public class ButtonService {
 
         activity.findViewById(R.id.menu).setOnClickListener(new MenuButtonOCL(activity));
         gameState = activity.findViewById(R.id.gameStateText);
-        gameState.setText("");
+        gameState.setVisibility(View.INVISIBLE);
     }
 
 
@@ -132,10 +133,12 @@ public class ButtonService {
 
         if (!upButton.isClickable() && !downButton.isClickable() && !leftButton.isClickable() && !rightButton.isClickable()) {
             gameState.setText(R.string.game_over);
+            gameState.setVisibility(VISIBLE);
         }
 
         if (levelService.getCurrentLevel().getCurrentLevel() == END_GAME) {
             gameState.setText(R.string.game_end);
+            gameState.setVisibility(VISIBLE);
         }
     }
 

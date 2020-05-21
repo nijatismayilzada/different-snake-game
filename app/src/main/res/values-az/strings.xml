@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Fərqli İlan Oyunu</string>
-    <string name="level">Mərhələ:</string>
-    <string name="game_over">UDUZDUN!</string>
-    <string name="game_end">OYUNUN SONU!</string>
-    <string name="moves">\ Gediş\n qalıb</string>
-    <string name="new_game">Yeni oyun</string>
-    <string name="continue_game">Davam et</string>
+    <string name="level">MƏRHƏLƏ:</string>
+    <string name="game_over">uduzdun!</string>
+    <string name="game_end">oyunun sonu!</string>
+    <string name="moves">\ GEDİŞ\n QALIB</string>
+    <string name="new_game">YENİ OYUN</string>
+    <string name="continue_game">DAVAM ET</string>
     <string name="checkpoint">Qeyd edildi!</string>
-    <string name="about">Haqqında</string>
-    <string name="exit">Çıxış</string>
+    <string name="about">HAQQINDA</string>
+    <string name="exit">ÇIXIŞ</string>
 </resources>

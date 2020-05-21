@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Different Snake Game</string>
     <string name="level">LEVEL:</string>
-    <string name="game_over">GAME OVER</string>
-    <string name="game_end">END OF GAME!</string>
+    <string name="game_over">game over</string>
+    <string name="game_end">end of game!</string>
     <string name="moves">\ MOVES\n LEFT</string>
     <string name="new_game">NEW GAME</string>
     <string name="continue_game">CONTINUE</string>
-    <string name="checkpoint">Checkpoint!</string>
+    <string name="checkpoint">checkpoint!</string>
     <string name="about">ABOUT</string>
     <string name="exit">EXIT</string>
 </resources>
