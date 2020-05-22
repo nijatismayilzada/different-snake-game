@@ -7,10 +7,11 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.thepot.differentsnakegame.Board;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.AdL;
-import com.thepot.differentsnakegame.clicklistener.AdsOICL;
 
 import static java.util.Collections.singletonList;
 
@@ -48,4 +49,14 @@ public class AdsService {
         interstitialAd.show();
     }
 
+}
+
+
+class AdsOICL implements OnInitializationCompleteListener {
+    AdsOICL() {
+    }
+
+    @Override
+    public void onInitializationComplete(InitializationStatus initializationStatus) {
+    }
 }

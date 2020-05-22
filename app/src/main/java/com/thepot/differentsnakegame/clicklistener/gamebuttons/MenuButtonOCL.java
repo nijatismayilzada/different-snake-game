@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.thepot.differentsnakegame.MainActivity;
+import com.thepot.differentsnakegame.R;
 
 public class MenuButtonOCL implements View.OnClickListener {
 
@@ -13,6 +14,7 @@ public class MenuButtonOCL implements View.OnClickListener {
 
     public MenuButtonOCL(final AppCompatActivity activity) {
         this.activity = activity;
+        this.activity.findViewById(R.id.menu).setOnClickListener(this);
     }
 
 

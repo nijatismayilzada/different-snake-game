@@ -1,16 +1,16 @@
 package com.thepot.differentsnakegame.runnable;
 
-import com.thepot.differentsnakegame.service.ButtonService;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.LoadSaveOCL;
 
 public class HideSaveRunnable implements Runnable {
-    private ButtonService buttonService;
+    private LoadSaveOCL loadSaveOCL;
 
-    public HideSaveRunnable(ButtonService buttonService) {
-        this.buttonService = buttonService;
+    public HideSaveRunnable(LoadSaveOCL loadSaveOCL) {
+        this.loadSaveOCL = loadSaveOCL;
     }
 
     @Override
     public void run() {
-        buttonService.clickableLoadSaveButton(false);
+        loadSaveOCL.clickableLoadSaveButton(false);
     }
 }

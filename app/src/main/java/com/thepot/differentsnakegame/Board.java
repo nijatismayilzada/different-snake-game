@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.LoadSaveOCL;
+import com.thepot.differentsnakegame.clicklistener.gamebuttons.MenuButtonOCL;
 import com.thepot.differentsnakegame.repository.CellRepository;
 import com.thepot.differentsnakegame.repository.DatabaseDetails;
 import com.thepot.differentsnakegame.repository.LevelRepository;
@@ -70,9 +72,11 @@ public class Board {
         snakeService = new SnakeService(appCompatActivity, cageService, levelService, this, new SaveRunnable(this));
         borderService = new BorderService(appCompatActivity, cageService, levelService);
         AdsService adsService = new AdsService(activity, this);
-        buttonService = new ButtonService(activity, cageService, snakeService, levelService, this, adsService);
-        showSaveRunnable = new ShowSaveRunnable(buttonService);
-        hideSaveRunnable = new HideSaveRunnable(buttonService);
+        new MenuButtonOCL(activity);
+        LoadSaveOCL loadSaveOCL = new LoadSaveOCL(activity, this, adsService, levelService);
+        showSaveRunnable = new ShowSaveRunnable(loadSaveOCL);
+        hideSaveRunnable = new HideSaveRunnable(loadSaveOCL);
+        buttonService = new ButtonService(activity, cageService, snakeService, levelService);
     }
 
     public void clearAndDraw() {
