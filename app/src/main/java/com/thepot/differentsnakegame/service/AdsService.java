@@ -6,14 +6,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.thepot.differentsnakegame.Board;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.AdL;
-
-import static java.util.Collections.singletonList;
 
 public class AdsService {
 
@@ -24,12 +21,12 @@ public class AdsService {
     public AdsService(AppCompatActivity activity, Board board) {
 
         MobileAds.initialize(activity, new AdsOICL());
-        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(singletonList("35CC9854176EF7429B8898AC4FBB9CF6")).build());
+//        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(singletonList("35CC9854176EF7429B8898AC4FBB9CF6")).build());
         activity.<AdView>findViewById(R.id.adView).loadAd(new AdRequest.Builder().build());
 
         interstitialAd = new InterstitialAd(activity);
-//        interstitialAd.setAdUnitId("ca-app-pub-3436517585020059/5097995112");
-        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        interstitialAd.setAdUnitId("ca-app-pub-3436517585020059/5097995112");
+//        interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         interstitialAd.loadAd(new AdRequest.Builder().build());
         interstitialAd.setAdListener(new AdL(interstitialAd, board));
         clickCount = CLICK_THRESHOLD - 1;
