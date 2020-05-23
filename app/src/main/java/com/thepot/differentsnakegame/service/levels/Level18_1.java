@@ -114,7 +114,7 @@ public class Level18_1 implements Level {
         levelService.addLevelCell(3, 7, POISON);
         levelService.addLevelCell(12, 3, POISON);
 
-        levelService.addLevelCell(14, 0, SAVE);
+        levelService.addLevelCell(14, 1, SAVE);
 
         levelService.addLevelCell(12, 12, FOOD_MOVE_TO_NEXT_LEVEL);
         levelService.addLevelCell(14, 10, FOOD);

@@ -53,14 +53,8 @@ public class ButtonService {
 
     public void updateButtons() {
 
-        upButton.setClickable(true);
-        downButton.setClickable(true);
-        leftButton.setClickable(true);
-        rightButton.setClickable(true);
-        upButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
-        downButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
-        leftButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
-        rightButton.setBackground(activity.getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+        clickableButtons(true);
+        backgroundsButton(R.drawable.ic_keyboard_arrow_down_white_24dp);
 
 
         Cell snakeHead = snakeService.getSnakeHead();
@@ -115,7 +109,23 @@ public class ButtonService {
         if (levelService.getCurrentLevel().getCurrentLevel() == END_GAME) {
             gameState.setText(R.string.game_end);
             gameState.setVisibility(VISIBLE);
+            clickableButtons(false);
+            backgroundsButton(R.drawable.ic_keyboard_arrow_down_gray_24dp);
         }
+    }
+
+    private void backgroundsButton(int resource) {
+        upButton.setBackground(activity.getDrawable(resource));
+        downButton.setBackground(activity.getDrawable(resource));
+        leftButton.setBackground(activity.getDrawable(resource));
+        rightButton.setBackground(activity.getDrawable(resource));
+    }
+
+    private void clickableButtons(boolean enabled) {
+        upButton.setClickable(enabled);
+        downButton.setClickable(enabled);
+        leftButton.setClickable(enabled);
+        rightButton.setClickable(enabled);
     }
 
     private int checkEdge(boolean endOfEdge, int coordinate, int replacementCoordinate) {

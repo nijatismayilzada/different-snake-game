@@ -13,7 +13,6 @@ public class LevelRandom implements Level {
 
     @Override
     public void loadLevel() {
-        levelService.loadRandomFood();
     }
 
     @Override
