@@ -6,8 +6,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.thepot.differentsnakegame.Board;
 import com.thepot.differentsnakegame.R;
 import com.thepot.differentsnakegame.clicklistener.AdL;
@@ -20,7 +18,8 @@ public class AdsService {
 
     public AdsService(AppCompatActivity activity, Board board) {
 
-        MobileAds.initialize(activity, new AdsOICL());
+        MobileAds.initialize(activity, initializationStatus -> {
+        });
 //        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(singletonList("35CC9854176EF7429B8898AC4FBB9CF6")).build());
         activity.<AdView>findViewById(R.id.adView).loadAd(new AdRequest.Builder().build());
 
@@ -49,11 +48,3 @@ public class AdsService {
 }
 
 
-class AdsOICL implements OnInitializationCompleteListener {
-    AdsOICL() {
-    }
-
-    @Override
-    public void onInitializationComplete(InitializationStatus initializationStatus) {
-    }
-}
