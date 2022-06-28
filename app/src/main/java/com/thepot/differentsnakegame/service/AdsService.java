@@ -30,7 +30,7 @@ public class AdsService {
         this.board = board;
         MobileAds.initialize(activity, initializationStatus -> {
         });
-//        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(singletonList("35CC9854176EF7429B8898AC4FBB9CF6")).build());
+//        MobileAds.setRequestConfiguration(new RequestConfiguration.Builder().setTestDeviceIds(singletonList("35CC9854176EF7429B8898AC4FBB9CF6")).build()); // test
         activity.<AdView>findViewById(R.id.adView).loadAd(new AdRequest.Builder().build());
 
         load(activity, board);
