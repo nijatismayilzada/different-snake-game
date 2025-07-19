@@ -4,7 +4,7 @@ android {
     compileSdk 36
     defaultConfig {
         applicationId "com.thepot.differentsnakegame"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdk 36
         versionCode 9
         versionName '1.9'
